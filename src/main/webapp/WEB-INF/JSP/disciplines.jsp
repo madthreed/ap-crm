@@ -11,6 +11,7 @@
     <title>Disciplines List</title>
     <link rel="stylesheet" href="../../resources/css/fonts.css">
     <link rel="stylesheet" href="../../resources/css/style.css">
+    <script src="../../resources/js/functions.js"></script>
 </head>
 <body>
 
@@ -36,9 +37,7 @@
             <form method="get" action="/discipline-modify">
                 <input class="i_button disabled" type="submit" value="Модифицировать выбранную дисциплину...">
             </form>
-            <form method="get" action="/discipline-delete">
-                <input class="i_button disabled" type="submit" value="Удалить выбранные дисциплины...">
-            </form>
+            <input class="i_button" onclick="deleteDisciplines()" type="submit" value="Удалить выбранные дисциплины...">
         </div>
 
         <p>Список дисциплин</p>
@@ -54,7 +53,7 @@
             <c:forEach var="discipline" items="${disciplines}">
                 <tr>
                     <td class="main-section__table col_checkbox">
-                        <input type="checkbox" name="selected" value="${discipline.id}">
+                        <input type="checkbox" name="idDiscipline" value="${discipline.id}">
                     </td>
                     <td class="main-section__table col_discipline">${discipline.name}</td>
                 </tr>
@@ -64,6 +63,9 @@
     </section>
 </div>
 
+<form id="deleteDisciplineForm" action="/disciplines" method="post">
+    <input type="hidden" id="deleteDisciplineHidden" name="deleteDisciplineHidden">
+</form>
 
 <footer class="footer">
     <div>&copy; 2021 MadThreeD "Java Junior" Avenue course</div>

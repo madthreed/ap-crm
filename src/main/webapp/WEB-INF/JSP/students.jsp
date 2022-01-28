@@ -40,7 +40,7 @@
             <form method="get" action="/student-modify">
                 <input class="i_button disabled" type="submit" value="Модифицировать выбранного студента...">
             </form>
-                <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
+            <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
         </div>
 
         <p>Список студентов</p>

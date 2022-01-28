@@ -13,3 +13,19 @@ function deleteStudents() {
     document.getElementById("deleteStudentHidden").value = ids;
     document.getElementById("deleteStudentForm").submit();
 }
+
+function deleteDisciplines() {
+    let checkedDisciplines = document.querySelectorAll('input[name=idDiscipline]:checked');
+    if (checkedDisciplines.length === 0) {
+        alert("Выберите хотя бы одну дисциплину!!");
+        return;
+    }
+
+    let ids = "";
+    for (let i = 0; i < checkedDisciplines.length; i++) {
+        ids = ids + checkedDisciplines[i].value + " ";
+    }
+
+    document.getElementById("deleteDisciplineHidden").value = ids;
+    document.getElementById("deleteDisciplineForm").submit();
+}

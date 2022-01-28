@@ -26,4 +26,22 @@ public class DisciplineController extends HttpServlet {
             req.getRequestDispatcher("./WEB-INF/JSP/sqlerror.jsp").forward(req, resp);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String ids = req.getParameter("deleteDisciplineHidden");
+        String[] idsDelete = ids.split(" ");
+
+        DBServices dbServices = new DBServices();
+
+        for (String id : idsDelete) {
+            try {
+                dbServices.deleteDisciplineById(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        resp.sendRedirect("/disciplines");
+    }
 }

@@ -55,7 +55,7 @@ public class DBServices implements IDBServices {
 
 
     @Override
-    public void modifyDiscipline(String id, String newName) throws SQLException {
+    public void modifyDisciplineById(String id, String newName) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
         stmt.execute("update discipline set `discipline`= '" + newName + "' where (`id`=" + id + ")");
@@ -65,12 +65,10 @@ public class DBServices implements IDBServices {
 
     //TODO Change STATUS=0, not DELETE
     @Override
-    public void deleteDiscipline(String id) throws SQLException {
+    public void deleteDisciplineById(String id) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("delete from discipline where (`id`=" + id + ")");
-
-        stmt.close();
+        stmt.execute("update `students24`.`discipline` set `status` = '0' where id = " + id + "");
     }
 
     @Override
@@ -174,7 +172,7 @@ public class DBServices implements IDBServices {
 
 
     @Override
-    public void modifyTerm(String idTerm, String newDuration, String newIdsDisc) {
+    public void modifyTermById(String idTerm, String newDuration, String newIdsDisc) {
 
     }
 

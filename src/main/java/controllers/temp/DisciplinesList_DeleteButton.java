@@ -23,7 +23,7 @@ public class DisciplinesList_DeleteButton extends HttpServlet {
         for (String selectedElement : selectedElements) {
             DBServices dbServices = new DBServices();
             try {
-                dbServices.deleteDiscipline(selectedElement);
+                dbServices.deleteDisciplineById(selectedElement);
             } catch (SQLException e) {
                 req.getRequestDispatcher("./WEB-INF/JSP/sqlerror.jsp").forward(req, resp);
             }
