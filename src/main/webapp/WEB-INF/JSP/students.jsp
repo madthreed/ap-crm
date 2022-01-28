@@ -37,9 +37,8 @@
             <form method="get" action="/student-create">
                 <input class="i_button" type="submit" value="Создать студента...">
             </form>
-            <form method="get" action="/student-modify">
-                <input class="i_button disabled" type="submit" value="Модифицировать выбранного студента...">
-            </form>
+            <input class="i_button" onclick="modifyStudent()" type="submit"
+                   value="Модифицировать выбранного студента...">
             <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
         </div>
 
@@ -74,6 +73,10 @@
 
 <form id="deleteStudentForm" action="/students" method="post">
     <input type="hidden" id="deleteStudentHidden" name="deleteStudentHidden">
+</form>
+
+<form id="modifyStudentForm" action="/student-modify" method="post">
+    <input type="hidden" id="modifyStudentHidden" name="modifyStudentHidden">
 </form>
 
 <footer class="footer">

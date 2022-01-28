@@ -1,3 +1,14 @@
+function modifyStudent() {
+    let checkedDisciplines = document.querySelectorAll('input[name=idStudent]:checked');
+    if (checkedDisciplines.length !== 1) {
+        alert("Выберите только одного студента!!");
+        return;
+    }
+
+    document.getElementById("modifyStudentHidden").value = checkedDisciplines[0].value;
+    document.getElementById("modifyStudentForm").submit();
+}
+
 function deleteStudents() {
     let checkedStudents = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedStudents.length === 0) {
