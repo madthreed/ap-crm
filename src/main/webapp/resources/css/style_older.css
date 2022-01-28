@@ -1,0 +1,360 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Comic Sans MS", sans-serif;
+}
+
+body {
+    background: #ececec;
+    /*width: 90%;*/
+    margin: 5px auto auto;
+}
+
+.a_button {
+    background: #cccccc;
+    color: #444246;
+    font-size: 0.8em;
+    font-weight: bold;
+    border: 1px solid gray;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    height: fit-content;
+}
+
+.a_button:hover {
+    /*background: rgb(177, 198, 237);*/
+}
+
+.i_button {
+    background: #cccccc;
+    color: #444246;
+    font-size: 0.8em;
+    font-weight: bold;
+    border: 1px solid gray;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    height: fit-content;
+}
+
+.i_button:hover {
+    background: rgb(177, 198, 237);
+}
+
+.home_button {
+    text-align: center;
+}
+
+.home_button:hover {
+}
+
+.nav_button {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.nav_button:hover {
+}
+
+.container {
+    display: grid;
+    grid-template-columns: minmax(120px, 200px) auto minmax(120px, 200px);
+    grid-template-rows: max-content;
+    height: 100%;
+    margin-top: 16px;
+}
+
+.nav {
+    grid-row: 2;
+    grid-column: 1;
+    padding: 0 8px;
+    text-align: left;
+    align-self: start;
+}
+
+.header {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.header.name {
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: normal;
+    background: white;
+    border: 1px black solid;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.log-in-out {
+    grid-row: 1;
+    grid-column: 3;
+    align-self: end;
+    margin: 0 8px;
+}
+
+.footer {
+    background: rgb(188, 188, 188);
+    color: rgb(51, 63, 159);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    /*width: 90%;*/
+    width: 100%;
+    height: fit-content;
+    border-radius: 5px;
+    transform: translate(-50%, 0);
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.main-section__table {
+    /*overflow-x: auto;*/
+    width: 100%;
+    margin-top: 18px;
+
+    border: 1px solid grey;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.main-section__table caption {
+    font-weight: bold;
+    text-align: left;
+    padding: 6px
+}
+
+.main-section__table th {
+    background: #cccccc;
+    color: #444246;
+    border: 1px solid #444246;
+    font-weight: bold;
+    padding: 0 6px;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.main-section__table td {
+    border: 1px solid #444246;
+    font-size: smaller;
+    vertical-align: bottom;
+    padding: 0 6px;
+}
+
+.main-section__table.col_checkbox {
+    vertical-align: bottom;
+    text-align: center;
+    width: 6%;
+    height: 6em;
+}
+
+.main-section__table.col_surname {
+    vertical-align: bottom;
+    text-align: left;
+
+    width: 40%;
+    height: 1.2em;
+}
+
+.main-section__table.col_name {
+    vertical-align: bottom;
+    text-align: left;
+
+    width: 30%;
+    /*height: 6em;*/
+}
+
+.main-section__table.col_group {
+    vertical-align: bottom;
+    text-align: left;
+
+    width: 10%;
+    /*height: 6em;*/
+}
+
+.main-section__table.col_date {
+    vertical-align: bottom;
+    text-align: left;
+
+    /*height: 6em;*/
+}
+
+.main-section__table.col_discipline {
+    vertical-align: bottom;
+    text-align: left;
+
+    height: 6em;
+}
+
+.main-section__table.col_mark {
+    vertical-align: bottom;
+    text-align: left;
+
+    height: 6em;
+}
+
+.students-tbl-header {
+    height: 6em;
+}
+
+.student-progress-sngd-tbl-header {
+    height: 1.2em;
+}
+
+.student-progress-disciplines-tbl-header {
+    height: 6em;
+}
+
+.disciplines-tbl-header {
+    height: 6em;
+}
+
+.terms-tbl-header {
+    height: 6em;
+}
+
+.main-section__form {
+    /*height: 3em;*/
+}
+
+.main-section__form.annotation {
+    text-align: right;
+    /*vertical-align: top;*/
+    font-size: smaller;
+    padding-bottom: 9px;
+}
+
+.main-section__form.data {
+}
+
+.main-section__form.input {
+    /*height: 18px;*/
+    width: 100%;
+}
+
+.main-section__form.input:focus {
+}
+
+.main-section__form.input::selection {
+}
+
+
+.main-section {
+    margin-top: 8px;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.main-section__title {
+    padding: 8px 0;
+}
+
+.main-section__menu.home {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.main-section.terms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.main-section__terms-termslist {
+    grid-row: 1;
+    grid-column: 1/span 2;
+}
+
+.term-selector {
+    width: 200px;
+}
+
+.main-section__menu.terms {
+    grid-row: 2;
+    grid-column: 2;
+    margin-top: 48px;
+    height: fit-content;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: left;
+}
+
+.main-section__table.terms {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.main-section.students {
+    display: block;
+}
+
+.main-section__menu.students {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
+}
+
+/*.main-section__table.students th {*/
+/*    height: 6em;*/
+/*}*/
+/**/
+/*.main-section__table.students td {*/
+/*    height: 6em;*/
+/*}*/
+
+.main-section.disciplines {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.main-section__menu.disciplines {
+    grid-row: 1;
+    grid-column: 2;
+    margin-top: 48px;
+    height: fit-content;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: left;
+}
+
+.main-section__table.disciplines {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.main-section.student-progress {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.main-section__title.student-progress {
+    grid-row: 1;
+    grid-column: 1/span 2;
+    padding-bottom: 0;
+}
+
+.main-section__table.student-progress-sngd {
+    grid-row: 2;
+    grid-column: 1/span 2;
+}
+
+.main-section__table.student-progress-disciplines {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.main-section__student-progress-termlist {
+    grid-row: 3;
+    grid-column: 2;
+    margin-top: 18px;
+    justify-self: center;
+}
