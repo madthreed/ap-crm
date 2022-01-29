@@ -82,10 +82,10 @@ public class DBServices implements IDBServices {
 
 
     @Override
-    public void modifyDisciplineById(String id, String newName) throws SQLException {
+    public void modifyDisciplineById(String id, String name) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("update discipline set `discipline`= '" + newName + "' where (`id`=" + id + ")");
+        stmt.execute("update discipline set `discipline`= '" + name + "' where (`id`=" + id + ")");
 
         stmt.close();
     }
@@ -229,14 +229,14 @@ public class DBServices implements IDBServices {
     public void createStudent(String surname, String name, String group, String date) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("insert into  `student` (`surname`, `name`, `group`, `date`) values ('" + surname + "', '" + name + "', '" + group + "', '" + date + "');");
+        stmt.execute("insert into  student (`surname`, `name`, `group`, `date`) values ('" + surname + "', '" + name + "', '" + group + "', '" + dateToDB(date) + "');");
     }
 
     @Override
     public void deleteStudentById(String id) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("update `students24`.`student` set `status` = '0' where id = " + id + "");
+        stmt.execute("update student set `status` = '0' where id = " + id + "");
     }
 
     @Override
@@ -261,6 +261,6 @@ public class DBServices implements IDBServices {
     public void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("UPDATE `students24`.`student` SET `surname` = '"+surname+"', `name` = '"+name+"', `group` = '"+group+"', `date` = '"+date+"' WHERE (`id` = '"+id+"')");
+        stmt.execute("UPDATE `students24`.`student` SET `surname` = '"+surname+"', `name` = '"+name+"', `group` = '"+group+"', `date` = '"+dateToDB(date)+"' WHERE (`id` = '"+id+"')");
     }
 }
