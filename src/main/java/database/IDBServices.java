@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IDBServices {
+    String dateToDB(String date);
+
+    String dateFromDB(String date);
+
     List<Discipline> getAllActiveDisciplines() throws SQLException;
 
     void createDiscipline(String name) throws SQLException;
@@ -33,7 +37,10 @@ public interface IDBServices {
     void createStudent(String surname, String name, String group, String date) throws SQLException;
 
     void deleteStudentById(String id) throws SQLException;
-    //TODO еще не все
 
+    Student getStudentById(String id) throws SQLException;
+
+    void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException;
+    //TODO еще не все
 
 }

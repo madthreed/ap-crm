@@ -6,8 +6,14 @@ import entity.Student;
 import entity.Term;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DBServices implements IDBServices {
     private Connection connection;
@@ -21,6 +27,27 @@ public class DBServices implements IDBServices {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String dateToDB(String date) {
+        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
+        Date dateFromUser = null;
+
+        try {
+            dateFromUser = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return formatter.format(dateFromUser);
+    }
+
+    @Override
+    public String dateFromDB(String date) {
+        return null;
     }
 
     @Override
@@ -55,10 +82,10 @@ public class DBServices implements IDBServices {
 
 
     @Override
-    public void modifyDisciplineById(String id, String newName) throws SQLException {
+    public void modifyDisciplineById(String id, String name) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("update discipline set `discipline`= '" + newName + "' where (`id`=" + id + ")");
+        stmt.execute("update discipline set `discipline`= '" + name + "' where (`id`=" + id + ")");
 
         stmt.close();
     }
@@ -202,13 +229,38 @@ public class DBServices implements IDBServices {
     public void createStudent(String surname, String name, String group, String date) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("insert into  `student` (`surname`, `name`, `group`, `date`) values ('" + surname + "', '" + name + "', '" + group + "', '" + date + "');");
+        stmt.execute("insert into  student (`surname`, `name`, `group`, `date`) values ('" + surname + "', '" + name + "', '" + group + "', '" + dateToDB(date) + "');");
     }
 
     @Override
     public void deleteStudentById(String id) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("update `students24`.`student` set `status` = '0' where id = " + id + "");
+        stmt.execute("update student set `status` = '0' where id = " + id + "");
+    }
+
+    @Override
+    public Student getStudentById(String id) throws SQLException {
+        Student student = new Student();
+
+        createConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from student where status='1' and id='"+id+"'");
+        while (rs.next()) {
+            student.setId(rs.getInt("id"));
+            student.setSurname(rs.getString("surname"));
+            student.setName(rs.getString("name"));
+            student.setGroup(rs.getString("group"));
+            student.setDate(rs.getDate("date"));
+        }
+
+        return student;
+    }
+
+    @Override
+    public void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException {
+        createConnection();
+        Statement stmt = connection.createStatement();
+        stmt.execute("UPDATE `students24`.`student` SET `surname` = '"+surname+"', `name` = '"+name+"', `group` = '"+group+"', `date` = '"+dateToDB(date)+"' WHERE (`id` = '"+id+"')");
     }
 }
