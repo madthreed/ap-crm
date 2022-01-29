@@ -75,7 +75,7 @@
     <input type="hidden" id="deleteStudentHidden" name="deleteStudentHidden">
 </form>
 
-<form id="modifyStudentForm" action="/student-modify" method="post">
+<form id="modifyStudentForm" action="/student-modify" method="get">
     <input type="hidden" id="modifyStudentHidden" name="modifyStudentHidden">
 </form>
 

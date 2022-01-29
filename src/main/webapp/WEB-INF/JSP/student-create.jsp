@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!doctype html>
 <html lang="en">
@@ -14,9 +16,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $( "#datepicker" ).datepicker();
-        } );
+        $(function () {
+            $("#datepicker").datepicker();
+        });
     </script>
 </head>
 <body>
@@ -41,8 +43,9 @@
             <input class="main-section__form input" type="text" name="surname" placeholder="Фамилия">
             <input class="main-section__form input" type="text" name="name" placeholder="Имя">
             <input class="main-section__form input" type="text" name="group" placeholder="Группа">
-            <input class="main-section__form input" type="text" id="datepicker" name="date" placeholder="Дата поступления">
-            <input class="i_button" type="submit" name="create" value="Создать">
+            <input class="main-section__form input" type="text" name="date" id="datepicker"
+                   placeholder="Дата поступления">
+            <input class="i_button" type="submit" value="Создать">
         </form>
     </section>
 

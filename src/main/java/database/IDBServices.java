@@ -33,6 +33,10 @@ public interface IDBServices {
     void createStudent(String surname, String name, String group, String date) throws SQLException;
 
     void deleteStudentById(String id) throws SQLException;
+
+    Student getStudentById(String id) throws SQLException;
+
+    void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException;
     //TODO еще не все
 
 

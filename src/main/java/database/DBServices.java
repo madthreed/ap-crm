@@ -211,4 +211,29 @@ public class DBServices implements IDBServices {
         Statement stmt = connection.createStatement();
         stmt.execute("update `students24`.`student` set `status` = '0' where id = " + id + "");
     }
+
+    @Override
+    public Student getStudentById(String id) throws SQLException {
+        Student student = new Student();
+
+        createConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from student where status='1' and id='"+id+"'");
+        while (rs.next()) {
+            student.setId(rs.getInt("id"));
+            student.setSurname(rs.getString("surname"));
+            student.setName(rs.getString("name"));
+            student.setGroup(rs.getString("group"));
+            student.setDate(rs.getDate("date"));
+        }
+
+        return student;
+    }
+
+    @Override
+    public void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException {
+        createConnection();
+        Statement stmt = connection.createStatement();
+        stmt.execute("UPDATE `students24`.`student` SET `surname` = '"+surname+"', `name` = '"+name+"', `group` = '"+group+"', `date` = '"+date+"' WHERE (`id` = '"+id+"')");
+    }
 }

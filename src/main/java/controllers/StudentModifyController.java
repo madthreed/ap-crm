@@ -1,6 +1,7 @@
 package controllers;
 
 import database.DBServices;
+import entity.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +10,58 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 @WebServlet(name = "StudentModifyController", urlPatterns = "/student-modify")
 public class StudentModifyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("modifyStudentHidden");
+
+        DBServices dbServices = new DBServices();
+        Student student = null;
+        try {
+            student = dbServices.getStudentById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        req.setAttribute("student", student);
         req.getRequestDispatcher("./WEB-INF/JSP/student-modify.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("modifyStudentHidden");
+        String id = req.getParameter("id");
+        String surname = req.getParameter("surname");
+        String name = req.getParameter("name");
+        String group = req.getParameter("group");
+        String date = req.getParameter("date");
 
         DBServices dbServices = new DBServices();
-//        dbServices.deleteStudentById(id);
 
+        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
+        Date dateFromUser = null;
+
+        try {
+            dateFromUser = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s = formatter.format(dateFromUser);
+
+        try {
+            dbServices.modifyStudentById(id, surname, name, group, s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         resp.sendRedirect("/students");
     }
 }
