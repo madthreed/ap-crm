@@ -1,3 +1,18 @@
+function modifyStudent() {
+    let checkedStudents = document.querySelectorAll('input[name=idStudent]:checked');
+    if (checkedStudents.length === 0) {
+        alert("Выберите хотя бы одного студента!!");
+        return;
+    }
+    if (checkedStudents.length > 1) {
+        alert("Выберите только одного студента!!");
+        return;
+    }
+
+    document.getElementById("modifyStudentHidden").value = checkedStudents[0].value;
+    document.getElementById("modifyStudentForm").submit();
+}
+
 function deleteStudents() {
     let checkedStudents = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedStudents.length === 0) {
