@@ -30,21 +30,9 @@ public class StudentCreateController extends HttpServlet {
         String group = req.getParameter("group");
         String date = req.getParameter("date");
 
-        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
-        Date dateFromUser = null;
-
-        try {
-            dateFromUser = format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String s = formatter.format(dateFromUser);
-
         DBServices dbServices = new DBServices();
         try {
-            dbServices.createStudent(surname, name, group, s);
+            dbServices.createStudent(surname, name, group, date); //dbServices.dateToDB(date)
         } catch (SQLException e) {
             req.getRequestDispatcher("./WEB-INF/JSP/sqlerror.jsp").forward(req, resp);
         }

@@ -6,8 +6,14 @@ import entity.Student;
 import entity.Term;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DBServices implements IDBServices {
     private Connection connection;
@@ -21,6 +27,27 @@ public class DBServices implements IDBServices {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String dateToDB(String date) {
+        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
+        Date dateFromUser = null;
+
+        try {
+            dateFromUser = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return formatter.format(dateFromUser);
+    }
+
+    @Override
+    public String dateFromDB(String date) {
+        return null;
     }
 
     @Override

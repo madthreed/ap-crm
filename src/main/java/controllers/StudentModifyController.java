@@ -45,20 +45,8 @@ public class StudentModifyController extends HttpServlet {
 
         DBServices dbServices = new DBServices();
 
-        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
-        Date dateFromUser = null;
-
         try {
-            dateFromUser = format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String s = formatter.format(dateFromUser);
-
-        try {
-            dbServices.modifyStudentById(id, surname, name, group, s);
+            dbServices.modifyStudentById(id, surname, name, group, date); //dbServices.dateToDB(date));
         } catch (SQLException e) {
             e.printStackTrace();
         }
