@@ -13,6 +13,6 @@
         <input class="main-section__form input" type="text" name="group" placeholder="Группа">
         <input class="main-section__form input" type="text" name="date" id="datepicker"
                placeholder="Дата поступления">
-        <input class="i_button" type="submit" value="Создать">
+        <input class="apply_button" type="submit" value="Создать">
     </form>
 </section>

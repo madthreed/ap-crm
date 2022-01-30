@@ -24,6 +24,10 @@ public interface IDBServices {
 
     List<Term> getAllActiveTerms() throws SQLException;
 
+    Term getFirstActiveTerm() throws SQLException;
+
+    Term getLastActiveTerm() throws SQLException;
+
     Term getTermById(String id) throws SQLException;
 
     List<Discipline> getDisciplinesByTerm(String idTerm) throws SQLException;

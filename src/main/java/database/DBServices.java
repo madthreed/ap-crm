@@ -65,8 +65,6 @@ public class DBServices implements IDBServices {
             disciplines.add(discipline);
         }
 
-        stmt.close();
-
         return disciplines;
     }
 
@@ -136,11 +134,46 @@ public class DBServices implements IDBServices {
             terms.add(term);
         }
 
-        stmt.close();
-
         return terms;
     }
 
+    @Override
+    public Term getFirstActiveTerm() throws SQLException {
+        createConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from term where status = '1' order by id limit 1");
+
+        Term term = new Term();
+
+        while (rs.next()) {
+            term.setId(rs.getInt("id"));
+            term.setName(rs.getString("term"));
+            term.setDuration(rs.getString("duration"));
+            term.setStatus(rs.getInt("status"));
+            term.setDisciplines((ArrayList<Discipline>) getDisciplinesByTerm(String.valueOf(rs.getInt("id"))));
+        }
+
+        return term;
+    }
+
+    @Override
+    public Term getLastActiveTerm() throws SQLException {
+        createConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from term where status = '1' order by id desc limit 1");
+
+        Term term = new Term();
+
+        while (rs.next()) {
+            term.setId(rs.getInt("id"));
+            term.setName(rs.getString("term"));
+            term.setDuration(rs.getString("duration"));
+            term.setStatus(rs.getInt("status"));
+            term.setDisciplines((ArrayList<Discipline>) getDisciplinesByTerm(String.valueOf(rs.getInt("id"))));
+        }
+
+        return term;
+    }
 
     @Override
     public Term getTermById(String id) throws SQLException {
@@ -182,8 +215,6 @@ public class DBServices implements IDBServices {
             disciplines.add(discipline);
         }
 
-        stmt.close();
-
         return disciplines;
     }
 
@@ -192,17 +223,26 @@ public class DBServices implements IDBServices {
     public void createTerm(String duration, String idsDisc) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("select term from term order by id desc limit 1");
 
-        stmt.close();
+        Term lastActiveTerm = getLastActiveTerm();
+        int nextTerm = Integer.parseInt(lastActiveTerm.getName().split(" ")[1]) + 1;
+        String nextTermName = "Семестр " + nextTerm;
+
+        stmt.execute("insert into term (`term`, `duration`) values ('" + nextTermName + "', '" + duration + "')");
+
+        lastActiveTerm = getLastActiveTerm();
+
+        for (String idDisc : idsDisc.split(" ")) {
+            stmt.addBatch("insert into term_discipline (id_term, id_discipline) values ('"+lastActiveTerm.getId()+"','"+idDisc+"');");
+        }
+
+        stmt.executeBatch();
     }
-
 
     @Override
     public void modifyTermById(String idTerm, String newDuration, String newIdsDisc) {
 
     }
-
 
     @Override
     public List<Student> getAllActiveStudents() throws SQLException {
@@ -245,7 +285,7 @@ public class DBServices implements IDBServices {
 
         createConnection();
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("select * from student where status='1' and id='"+id+"'");
+        ResultSet rs = stmt.executeQuery("select * from student where status='1' and id='" + id + "'");
         while (rs.next()) {
             student.setId(rs.getInt("id"));
             student.setSurname(rs.getString("surname"));
@@ -261,6 +301,6 @@ public class DBServices implements IDBServices {
     public void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
-        stmt.execute("UPDATE `students24`.`student` SET `surname` = '"+surname+"', `name` = '"+name+"', `group` = '"+group+"', `date` = '"+dateToDB(date)+"' WHERE (`id` = '"+id+"')");
+        stmt.execute("update student set `surname` = '" + surname + "', `name` = '" + name + "', `group` = '" + group + "', `date` = '" + dateToDB(date) + "' where (`id` = '" + id + "')");
     }
 }

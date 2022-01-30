@@ -9,22 +9,21 @@ body {
     margin: 5px auto auto;
 }
 
-p {
-    margin: 0 8px;
-}
+/*p {*/
+/*    margin: 0 8px;*/
+/*}*/
 
 label {
     margin: 0 8px;
 }
 
 select {
-    border-style: none;
+    background: #e7e7e7;
+    color: #727171;
     border-radius: 4px;
-    /* background: transparent; */
-    /*background: linear-gradient(45deg, transparent 50%, blue 50%);*/
-    /*linear-gradient(135 deg, transparent 50 %, blue 50 %);*/
-    /*linear-gradient(to right, skyblue, skyblue);*/
-
+    padding: 0 8px;
+    border: solid 1px;
+    outline: none;
 }
 
 ::-webkit-scrollbar {
@@ -56,6 +55,32 @@ select {
 }
 
 .a_button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+
+    /*background: rgb(177, 198, 237);*/
+    /*border-radius: 5px;*/
+}
+
+.apply_button {
+    background: #727171;
+    color: #fdfdfd;
+    font-size: 0.8em;
+    font-weight: bold;
+    border: none;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    height: fit-content;
+    cursor: pointer;
+
+    min-width: 100px;
+}
+
+.apply_button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
 
@@ -225,20 +250,6 @@ select {
     grid-template-columns: 1fr 1fr;
 }
 
-.term-selector {
-    background: #727171;
-    color: #fff;
-    border-radius: 4px;
-    padding: 0 8px;
-}
-
-.discipline-selector {
-    background: #727171;
-    color: #fff;
-    border-radius: 4px;
-    padding: 0 8px;
-}
-
 /*-------------------------------------------*/
 /**/
 /*-------------------------------------------*/
@@ -382,7 +393,7 @@ select {
 /**/
 
 .main-section__form {
-    width: 20%;
+    width: 40%;
     margin: 8px 0;
     /*height: 1.5em;*/
     /*margin-top: 18px;*/

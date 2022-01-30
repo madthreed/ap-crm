@@ -5,24 +5,22 @@
 <section class="main-section terms">
     <div class="main-section__menu terms">
         <form method="get" action="/term-create">
-            <input class="i_button disabled" type="submit" value="Создать семестр...">
+            <input class="i_button" type="submit" value="Создать семестр...">
         </form>
-        <form method="get" action="/term-modify">
-            <input class="i_button disabled" type="submit" value="Модифицировать текущий семестр...">
-        </form>
-        <form method="get" action="/term-delete">
-            <input class="i_button disabled" type="submit" value="Удалить текущий семестр...">
-        </form>
+
+        <input class="i_button disabled" type="submit" value="Модифицировать текущий семестр...">
+
+        <input class="i_button disabled" type="submit" value="Удалить текущий семестр...">
     </div>
 
     <div class="main-section__terms-termslist">
         <span>Выбрать семестр</span>
-        <select class="term-selector" name="" required>
+        <select name="termSelector" required>
             <c:forEach var="term" items="${terms}">
-            <option name="selected" value="${term.id}">${term.name}
-                </c:forEach>
+                <option value="${term.id}">${term.name}</option>
+            </c:forEach>
         </select>
-        <input class="i_button disabled" type="submit" name="select" value="Выбрать">
+        <input class="apply_button disabled" type="submit" value="Выбрать">
     </div>
 
     <p>Длительность семестра: 24 недели</p>
@@ -37,9 +35,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="main-section__table col_discipline">Высшая математика</td>
-        </tr>
+        <c:forEach var="discipline" items="${disciplines}">
+            <tr>
+                <td class="main-section__table col_discipline">${discipline.name}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </section>

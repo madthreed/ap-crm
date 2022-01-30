@@ -10,6 +10,6 @@
     <form class="main-section__form" method="post" action="/discipline-modify">
         <input type="hidden" name="id" value="${discipline.id}">
         <input class="main-section__form input" type="text" name="name" value="${discipline.name}">
-        <input class="i_button" type="submit" value="Применить">
+        <input class="apply_button" type="submit" value="Применить">
     </form>
 </section>

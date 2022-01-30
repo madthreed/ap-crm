@@ -74,3 +74,29 @@ function deleteDisciplines() {
     document.getElementById("deleteDisciplineHiddenId").value = ids;
     document.getElementById("deleteDisciplineForm").submit();
 }
+
+function createTerm() {
+    let duration = document.getElementById('duration').value;
+    let checkedDisciplines = document.querySelectorAll('#disciplineSelector option:checked');
+
+    // let ids = Array.from(selected).map(el => el.value + " ");
+
+    if (checkedDisciplines.length === 0) {
+        alert("Выберите хотя бы одну дисциплину!!");
+        return;
+    }
+
+    if (duration.length === 0) {
+        alert("Введите длительность семестра!!");
+        return;
+    }
+
+    let ids = "";
+    for (let i = 0; i < checkedDisciplines.length; i++) {
+        ids = ids + checkedDisciplines[i].value + " ";
+    }
+
+    document.getElementById("createTermHiddenDuration").value = duration;
+    document.getElementById("createTermHiddenIds").value = ids;
+    document.getElementById("createTermForm").submit();
+}

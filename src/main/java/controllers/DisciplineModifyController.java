@@ -18,19 +18,18 @@ public class DisciplineModifyController extends HttpServlet {
         String id = req.getParameter("modifyDisciplineHiddenId");
 
         DBServices dbServices = new DBServices();
-        Discipline discipline = null;
 
         try {
-            discipline = dbServices.getDisciplineById(id);
+            Discipline discipline = dbServices.getDisciplineById(id);
+
+            req.setAttribute("discipline", discipline);
+            req.setAttribute("currentPage", "discipline-modify.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
-
-        req.setAttribute("discipline", discipline);
-        req.setAttribute("currentPage", "discipline-modify.jsp");
-        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
     }
 
     @Override

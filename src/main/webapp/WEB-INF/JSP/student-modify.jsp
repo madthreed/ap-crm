@@ -13,6 +13,6 @@
         <input class="main-section__form input" type="text" name="name" value="${student.name}">
         <input class="main-section__form input" type="text" name="group" value="${student.group}">
         <input class="main-section__form input" type="text" name="date" id="datepicker" value="${student.date}">
-        <input class="i_button" type="submit" value="Применить">
+        <input class="apply_button" type="submit" value="Применить">
     </form>
 </section>

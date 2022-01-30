@@ -9,6 +9,6 @@
 
     <form class="main-section__form" method="post">
         <input class="main-section__form input" type="text" name="name" placeholder="Название дисциплины">
-        <input class="i_button" type="submit" value="Создать">
+        <input class="apply_button" type="submit" value="Создать">
     </form>
 </section>
