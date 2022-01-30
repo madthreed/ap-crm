@@ -1,5 +1,4 @@
+<!doctype html>
 <html>
-<h1>
-    Home page!!!!!!!!!!!
-</h1>
+<jsp:forward page="/home" />
 </html>

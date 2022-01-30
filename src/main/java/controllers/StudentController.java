@@ -17,18 +17,21 @@ public class StudentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DBServices dbServices = new DBServices();
+
         try {
             ArrayList<Student> students = (ArrayList<Student>) dbServices.getAllActiveStudents();
             req.setAttribute("students", students);
-            req.getRequestDispatcher("./WEB-INF/JSP/students.jsp").forward(req, resp);
+            req.setAttribute("currentPage", "students.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
-            req.getRequestDispatcher("./WEB-INF/JSP/sqlerror.jsp").forward(req, resp);
+            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String ids = req.getParameter("deleteStudentHidden");
         String[] idsDelete = ids.split(" ");
 
@@ -39,6 +42,8 @@ public class StudentController extends HttpServlet {
                 dbServices.deleteStudentById(id);
             } catch (SQLException e) {
                 e.printStackTrace();
+                req.setAttribute("currentPage", "sqlerror.jsp");
+                req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
             }
         }
 

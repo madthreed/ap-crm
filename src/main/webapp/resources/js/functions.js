@@ -29,6 +29,21 @@ function deleteStudents() {
     document.getElementById("deleteStudentForm").submit();
 }
 
+function modifyDiscipline() {
+    let checkedDisciplines = document.querySelectorAll('input[name=idDiscipline]:checked');
+    if (checkedDisciplines.length === 0) {
+        alert("Выберите хотя бы одну дисциплину!!");
+        return;
+    }
+    if (checkedDisciplines.length > 1) {
+        alert("Выберите только одну дисциплину!!");
+        return;
+    }
+
+    document.getElementById("modifyDisciplineHidden").value = checkedDisciplines[0].value;
+    document.getElementById("modifyDisciplineForm").submit();
+}
+
 function deleteDisciplines() {
     let checkedDisciplines = document.querySelectorAll('input[name=idDiscipline]:checked');
     if (checkedDisciplines.length === 0) {
