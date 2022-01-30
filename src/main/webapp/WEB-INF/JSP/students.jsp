@@ -4,14 +4,16 @@
 
 <section class="main-section students">
     <div class="main-section__menu students">
-        <form method="get" action="/student-progress">
-            <input class="i_button disabled" type="submit" value="Просмотреть успеваемость выбранных студентов">
-        </form>
+        <input class="i_button" onclick="progressStudent()" type="submit"
+               value="Просмотреть успеваемость выбранных студентов">
+
         <form method="get" action="/student-create">
             <input class="i_button" type="submit" value="Создать студента...">
         </form>
+
         <input class="i_button" onclick="modifyStudent()" type="submit"
                value="Модифицировать выбранного студента...">
+
         <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
     </div>
 
@@ -44,9 +46,13 @@
 </section>
 
 <form id="deleteStudentForm" action="/students" method="post">
-    <input type="hidden" id="deleteStudentHidden" name="deleteStudentHidden">
+    <input type="hidden" id="deleteStudentHiddenId" name="deleteStudentHiddenId">
 </form>
 
 <form id="modifyStudentForm" action="/student-modify" method="get">
-    <input type="hidden" id="modifyStudentHidden" name="modifyStudentHidden">
+    <input type="hidden" id="modifyStudentHiddenId" name="modifyStudentHiddenId">
+</form>
+
+<form id="progressStudentForm" action="/student-progress" method="get">
+    <input type="hidden" id="progressStudentHiddenId" name="progressStudentHiddenId">
 </form>

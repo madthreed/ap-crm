@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DisciplineModifyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("modifyDisciplineHidden");
+        String id = req.getParameter("modifyDisciplineHiddenId");
 
         DBServices dbServices = new DBServices();
         Discipline discipline = null;

@@ -32,7 +32,7 @@ public class StudentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String ids = req.getParameter("deleteStudentHidden");
+        String ids = req.getParameter("deleteStudentHiddenId");
         String[] idsDelete = ids.split(" ");
 
         DBServices dbServices = new DBServices();

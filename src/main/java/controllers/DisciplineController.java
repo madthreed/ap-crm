@@ -32,7 +32,7 @@ public class DisciplineController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String ids = req.getParameter("deleteDisciplineHidden");
+        String ids = req.getParameter("deleteDisciplineHiddenId");
         String[] idsDelete = ids.split(" ");
 
         DBServices dbServices = new DBServices();

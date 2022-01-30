@@ -1,3 +1,18 @@
+function progressStudent() {
+    let checkedStudents = document.querySelectorAll('input[name=idStudent]:checked');
+    if (checkedStudents.length === 0) {
+        alert("Выберите хотя бы одного студента!!");
+        return;
+    }
+    if (checkedStudents.length > 1) {
+        alert("Выберите только одного студента!!");
+        return;
+    }
+
+    document.getElementById("progressStudentHiddenId").value = checkedStudents[0].value;
+    document.getElementById("progressStudentForm").submit();
+}
+
 function modifyStudent() {
     let checkedStudents = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedStudents.length === 0) {
@@ -9,7 +24,7 @@ function modifyStudent() {
         return;
     }
 
-    document.getElementById("modifyStudentHidden").value = checkedStudents[0].value;
+    document.getElementById("modifyStudentHiddenId").value = checkedStudents[0].value;
     document.getElementById("modifyStudentForm").submit();
 }
 
@@ -25,7 +40,7 @@ function deleteStudents() {
         ids = ids + checkedStudents[i].value + " ";
     }
 
-    document.getElementById("deleteStudentHidden").value = ids;
+    document.getElementById("deleteStudentHiddenId").value = ids;
     document.getElementById("deleteStudentForm").submit();
 }
 
@@ -40,7 +55,7 @@ function modifyDiscipline() {
         return;
     }
 
-    document.getElementById("modifyDisciplineHidden").value = checkedDisciplines[0].value;
+    document.getElementById("modifyDisciplineHiddenId").value = checkedDisciplines[0].value;
     document.getElementById("modifyDisciplineForm").submit();
 }
 
@@ -56,6 +71,6 @@ function deleteDisciplines() {
         ids = ids + checkedDisciplines[i].value + " ";
     }
 
-    document.getElementById("deleteDisciplineHidden").value = ids;
+    document.getElementById("deleteDisciplineHiddenId").value = ids;
     document.getElementById("deleteDisciplineForm").submit();
 }

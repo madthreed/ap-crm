@@ -7,8 +7,10 @@
         <form method="get" action="/discipline-create">
             <input class="i_button" type="submit" value="Создать дисциплину...">
         </form>
+
         <input class="i_button" onclick="modifyDiscipline()" type="submit"
                value="Модифицировать выбранную дисциплину...">
+
         <input class="i_button" onclick="deleteDisciplines()" type="submit" value="Удалить выбранные дисциплины...">
     </div>
 
@@ -35,9 +37,9 @@
 </section>
 
 <form id="deleteDisciplineForm" action="/disciplines" method="post">
-    <input type="hidden" id="deleteDisciplineHidden" name="deleteDisciplineHidden">
+    <input type="hidden" id="deleteDisciplineHiddenId" name="deleteDisciplineHiddenId">
 </form>
 
 <form id="modifyDisciplineForm" action="/discipline-modify" method="get">
-    <input type="hidden" id="modifyDisciplineHidden" name="modifyDisciplineHidden">
+    <input type="hidden" id="modifyDisciplineHiddenId" name="modifyDisciplineHiddenId">
 </form>

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class StudentModifyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("modifyStudentHidden");
+        String id = req.getParameter("modifyStudentHiddenId");
 
         DBServices dbServices = new DBServices();
         Student student = null;
