@@ -27,25 +27,32 @@
         </tbody>
     </table>
 
-    <table class="main-section__table student-progress-disciplines">
-        <thead>
-        <tr>
-            <th class="main-section__table col_discipline">Дисциплина</th>
-            <th class="main-section__table col_mark">Оценка</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="disciplineWithMarks" items="${disciplinesWithMarks}">
-<%--            <input type="hidden" name="disciplineId" value="disciplineWithMarks.discipline.id">--%>
-<%--            <input type="hidden" name="markId" value="disciplineWithMarks.mark.id">--%>
+    <form class="main-section__form" method="post" action="/student-progress-edit">
+        <table class="main-section__table student-progress-disciplines">
+            <thead>
             <tr>
-                <td class="main-section__table col_discipline">${disciplineWithMarks.discipline.name}</td>
-
-                <td class="main-section__table col_mark">
-                        <input type="number" min="0" max="5" name="${disciplineWithMarks.mark.id}" placeholder="${disciplineWithMarks.mark.mark}">
-                </td>
+                <th class="main-section__table col_discipline">Дисциплина</th>
+                <th class="main-section__table col_mark">Оценка</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach var="disciplineWithMarks" items="${disciplinesWithMarks}">
+                <input type="hidden" name="disciplineId" value="${disciplineWithMarks.discipline.id}">
+                <input type="hidden" name="markId" value="${disciplineWithMarks.mark.id}">
+                <tr>
+                    <td class="main-section__table col_discipline">
+                            ${disciplineWithMarks.discipline.name}
+                    </td>
+
+                    <td class="main-section__table col_mark">
+                        <input type="number" min="0" max="5" id="${disciplineWithMarks.mark.id}" name="marks"
+                               placeholder="${disciplineWithMarks.mark.mark}">
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+
+        <input class="apply_button" type="submit" value="Применить">
+    </form>
 </section>

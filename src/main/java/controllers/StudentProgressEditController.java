@@ -72,7 +72,11 @@ public class StudentProgressEditController extends HttpServlet {
                 if (discipline.getId() == mark.getDiscipline().getId()) {
                     disciplinesWithMarks.add(new DisciplineWithMark(discipline, mark));
                 } else {
-                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, new Mark(student,term,discipline,0)));
+                    Mark newMark = new Mark(student,term,discipline,0);
+
+//                    new Mark(student,term,discipline,newMark)
+
+                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, newMark));
                 }
             }
         }
@@ -80,38 +84,14 @@ public class StudentProgressEditController extends HttpServlet {
         req.setAttribute("disciplinesWithMarks", disciplinesWithMarks);
         req.setAttribute("currentPage", "student-progress-edit.jsp");
         req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
-//        List<Mark> marks;
-//        Term selectedTerm;
-//
-//
-//        try {
-//            String studentId = req.getParameter("progressStudentHiddenId");
-//            Student student = dbServices.getStudentById(studentId);
-//
-//            List<Term> terms = dbServices.getAllActiveTerms();
-//
-//            String selected = req.getParameter("termSelector");
-//            if (selected == null) {
-//                selectedTerm = dbServices.getLastActiveTerm();
-//            } else {
-//                selectedTerm = dbServices.getTermById(selected);
-//            }
-//
-//            marks = dbServices.getMarksByStudentAndTermId(studentId, String.valueOf(selectedTerm.getId()));
-//
-//            req.setAttribute("terms", terms);
-//            req.setAttribute("selectedTerm", selectedTerm);
-//            req.setAttribute("marks", marks);
-//
-//            req.setAttribute("student", student);
-
-//        } catch (SQLException ex) {
-
-//        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String[] marks = req.getParameterValues("marks");
+        String[] disciplineIds = req.getParameterValues("disciplineId");
+        String[] markIds = req.getParameterValues("markId");
 
+        resp.sendRedirect("/students");
     }
 }

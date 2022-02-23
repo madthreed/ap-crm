@@ -130,3 +130,11 @@ function modifyTerm() {
     document.getElementById("modifyTermHiddenId").value = id;
     document.getElementById("modifyTermForm").submit();
 }
+
+function clearSelectedDisciplines(){
+    var elements = document.getElementById("disciplineSelector").options;
+
+    for(var i = 0; i < elements.length; i++){
+        elements[i].selected = false;
+    }
+}
