@@ -1,8 +1,6 @@
 package database;
 
-import entity.Discipline;
-import entity.Student;
-import entity.Term;
+import entity.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,11 +28,13 @@ public interface IDBServices {
 
     Term getTermById(String id) throws SQLException;
 
+    void deleteTermById(String id) throws SQLException;
+
     List<Discipline> getDisciplinesByTerm(String idTerm) throws SQLException;
 
     void createTerm(String duration, String idsDisc) throws SQLException;
 
-    void modifyTermById(String idTerm, String newDuration, String newIdsDisc);
+    void modifyTermById(String idTerm, String newDuration, String newIdsDisc) throws SQLException;
 
     List<Student> getAllActiveStudents() throws SQLException;
 
@@ -45,6 +45,13 @@ public interface IDBServices {
     Student getStudentById(String id) throws SQLException;
 
     void modifyStudentById(String id, String surname, String name, String group, String date) throws SQLException;
-    //TODO еще не все
 
+    List<Role> getAllRoles() throws SQLException;
+
+    boolean authUser(String login, String password, String role) throws SQLException;
+
+    List<Mark> getMarksByStudentAndTermId(String studentId, String termId) throws SQLException;
+
+//    List<Mark> getAllMarksByTermId(String studentId) throws SQLException;
+    //TODO еще не все
 }

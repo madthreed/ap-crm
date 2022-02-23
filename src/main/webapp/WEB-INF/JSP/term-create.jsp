@@ -2,13 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<section class="main-section">
+<section class="main-section create-modify">
     <p class="main-section__title">
         Для создания семестра заполните следующие данные и нажмите кнопку "Создать".
     </p>
 
     <div class="main-section__form">
-        <input class="main-section__form input" type="text" id="duration" placeholder="Длительность (в неделях)">
+        <input class="main-section__form input" type="number" id="duration" placeholder="Длительность (в неделях)" required maxlength="64">
 
         <p>Дисциплины в семестре</p>
 

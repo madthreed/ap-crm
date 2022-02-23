@@ -5,13 +5,9 @@
 }
 
 body {
-    width: 90%;
-    margin: 5px auto auto;
+    /*width: 100%;*/
+    margin: 8px 8px;
 }
-
-/*p {*/
-/*    margin: 0 8px;*/
-/*}*/
 
 label {
     margin: 0 8px;
@@ -147,12 +143,11 @@ select {
     background: #ececec;
     display: grid;
     grid-template-columns: minmax(120px, 200px) auto minmax(120px, 200px);
-    grid-template-rows: max-content;
-    height: 100%;
+    grid-template-rows: max-content min-content;
+    height: 95vh;
     border-radius: 12px;
-    padding-bottom: 6px;
-    padding-top: 6px;
-    margin-bottom: 32px;
+    padding: 6px 6px;
+    /*margin-bottom: 32px;*/
 }
 
 .nav {
@@ -201,7 +196,7 @@ select {
     /*width: 90%;*/
     width: 100%;
     height: fit-content;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     transform: translate(-50%, 0);
     font-size: 0.8em;
     font-weight: bold;
@@ -230,6 +225,11 @@ select {
 
 /*-------------------------------------------*/
 /**/
+.main-section.create-modify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .main-section.students {
     display: block;
@@ -301,70 +301,71 @@ select {
     vertical-align: middle;
     text-align: center;
     width: 10%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_surname {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
     width: 40%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_name {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
     width: 30%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_group {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
     width: 10%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_date {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_discipline {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
-    height: 2em;
+    width: 70%;
+    height: 3em;
 }
 
 .main-section__table.col_mark {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
-    height: 2em;
+    height: 3em;
 }
 
-.students-tbl-header {
-    height: 2em;
-}
+/*.students-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
 
-.student-progress-disciplines-tbl-header {
-    height: 2em;
-}
+/*.student-progress-disciplines-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
-.disciplines-tbl-header {
-    height: 2em;
-}
+/*.disciplines-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
-.terms-tbl-header {
-    height: 2em;
-}
+/*.terms-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
 .main-section__table.students {
 }
@@ -393,35 +394,29 @@ select {
 /**/
 
 .main-section__form {
-    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 14rem;
     margin: 8px 0;
     /*height: 1.5em;*/
     /*margin-top: 18px;*/
     /*background: #333f9f;*/
 }
 
-/*.main-section__form.annotation {*/
-/*    !*background: brown;*!*/
-/*    text-align: left;*/
-/*    vertical-align: top;*/
-/*    font-size: smaller;*/
-/*    padding-bottom: 9px;*/
-/*}*/
-
-/*.main-section__form.data {*/
-/*    vertical-align: top;*/
-/*}*/
-
 .main-section__form.input {
     border: none;
     border-bottom: 1px solid rgb(190, 174, 174);
-    background: transparent;
+    background: #ececec;
+
     outline: none;
 
     /*height: 18px;*/
     width: 100%;
     font-weight: bolder;
     vertical-align: top;
+    text-align: center;
 }
 
 .main-section__form.input:focus {
@@ -430,7 +425,15 @@ select {
 }
 
 .main-section__form.input::selection {
-    background: #ffaaaa;
+    color: #ffaaaa;
+}
+
+.main-section__form.input:invalid {
+    background: #fdd; /* Красный цвет фона */
+}
+
+.main-section__form.input:valid {
+    background: #ececec;
 }
 
 /*-------------------------------------------*/

@@ -100,3 +100,33 @@ function createTerm() {
     document.getElementById("createTermHiddenIds").value = ids;
     document.getElementById("createTermForm").submit();
 }
+
+function deleteTerm() {
+    // var checkedTerm = document.getElementById("termSelector").options.selectedIndex.value;
+
+    let checkedTerm = document.querySelector('#termSelector option:checked');
+
+    if (checkedTerm.length === 0) {
+        alert("Выберите семестр!!");
+        return;
+    }
+
+    let id = checkedTerm.value;
+
+    document.getElementById("deleteTermHiddenId").value = id;
+    document.getElementById("deleteTermForm").submit();
+}
+
+function modifyTerm() {
+    let checkedTerm = document.querySelector('#termSelector option:checked');
+
+    if (checkedTerm.length === 0) {
+        alert("Выберите семестр!!");
+        return;
+    }
+
+    let id = checkedTerm.value;
+
+    document.getElementById("modifyTermHiddenId").value = id;
+    document.getElementById("modifyTermForm").submit();
+}
