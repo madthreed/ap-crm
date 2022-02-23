@@ -5,16 +5,18 @@
 <section class="main-section students">
     <div class="main-section__menu students">
         <input class="i_button" onclick="progressStudent()" type="submit"
-               value="Просмотреть успеваемость выбранных студентов">
+               value="Просмотреть успеваемость выбранного студента">
 
-        <form method="get" action="/student-create">
-            <input class="i_button" type="submit" value="Создать студента...">
-        </form>
+        <c:if test="${role == 1}">
+            <form method="get" action="/student-create">
+                <input class="i_button" type="submit" value="Создать студента...">
+            </form>
 
-        <input class="i_button" onclick="modifyStudent()" type="submit"
-               value="Модифицировать выбранного студента...">
+            <input class="i_button" onclick="modifyStudent()" type="submit"
+                   value="Модифицировать выбранного студента...">
 
-        <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
+            <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
+        </c:if>
     </div>
 
     <p>Список студентов</p>
@@ -22,11 +24,11 @@
     <table class="main-section__table students">
         <thead>
         <tr>
-            <th class="students-tbl-header"></th>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Группа</th>
-            <th>Дата поступления</th>
+            <th class="main-section__table col_checkbox"></th>
+            <th class="main-section__table col_surname">Фамилия</th>
+            <th class="main-section__table col_name">Имя</th>
+            <th class="main-section__table col_group">Группа</th>
+            <th class="main-section__table col_date">Дата поступления</th>
         </tr>
         </thead>
         <tbody>

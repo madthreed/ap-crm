@@ -2,7 +2,6 @@ package controllers;
 
 import database.DBServices;
 import entity.Discipline;
-import entity.Term;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,32 +12,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "TermController", urlPatterns = "/terms")
-public class TermController extends HttpServlet {
+@WebServlet(name = "TermCreateController", urlPatterns = "/term-create")
+public class TermCreateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Discipline> disciplines = null;
-        Term selectedTerm = null;
         DBServices dbServices = new DBServices();
 
-        String selected = req.getParameter("termSelector");
-
         try {
-            if (selected != null) {
-                selectedTerm = dbServices.getTermById(selected);
-                disciplines = dbServices.getDisciplinesByTerm(selected);
-            } else {
-                selectedTerm = dbServices.getLastActiveTerm();
-                disciplines = selectedTerm!=null?dbServices.getDisciplinesByTerm(String.valueOf(selectedTerm.getId())):null;
-            }
+            List<Discipline> disciplines = dbServices.getAllActiveDisciplines();
 
-
-            List<Term> terms = dbServices.getAllActiveTerms();
-            req.setAttribute("terms", terms);
-            req.setAttribute("selectedTerm", selectedTerm);
             req.setAttribute("disciplines", disciplines);
-
-            req.setAttribute("currentPage", "terms.jsp");
+            req.setAttribute("currentPage", "term-create.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,12 +33,14 @@ public class TermController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("deleteTermHiddenId");
+        String duration = req.getParameter("createTermHiddenDuration");
+        String selectedIds = req.getParameter("createTermHiddenIds");
+
 
         DBServices dbServices = new DBServices();
 
         try {
-            dbServices.deleteTermById(id);
+            dbServices.createTerm(duration, selectedIds);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");

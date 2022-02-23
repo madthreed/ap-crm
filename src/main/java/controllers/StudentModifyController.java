@@ -18,19 +18,18 @@ public class StudentModifyController extends HttpServlet {
         String id = req.getParameter("modifyStudentHiddenId");
 
         DBServices dbServices = new DBServices();
-        Student student = null;
 
         try {
-            student = dbServices.getStudentById(id);
+            Student student = dbServices.getStudentById(id);
+
+            req.setAttribute("student", student);
+            req.setAttribute("currentPage", "student-modify.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
-
-        req.setAttribute("student", student);
-        req.setAttribute("currentPage", "student-modify.jsp");
-        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
     }
 
     @Override

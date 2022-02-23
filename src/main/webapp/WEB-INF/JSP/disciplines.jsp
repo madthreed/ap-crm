@@ -4,14 +4,16 @@
 
 <section class="main-section disciplines">
     <div class="main-section__menu disciplines">
-        <form method="get" action="/discipline-create">
-            <input class="i_button" type="submit" value="Создать дисциплину...">
-        </form>
+        <c:if test="${role == 1}">
+            <form method="get" action="/discipline-create">
+                <input class="i_button" type="submit" value="Создать дисциплину...">
+            </form>
 
-        <input class="i_button" onclick="modifyDiscipline()" type="submit"
-               value="Модифицировать выбранную дисциплину...">
+            <input class="i_button" onclick="modifyDiscipline()" type="submit"
+                   value="Модифицировать выбранную дисциплину...">
 
-        <input class="i_button" onclick="deleteDisciplines()" type="submit" value="Удалить выбранные дисциплины...">
+            <input class="i_button" onclick="deleteDisciplines()" type="submit" value="Удалить выбранные дисциплины...">
+        </c:if>
     </div>
 
     <p>Список дисциплин</p>
@@ -19,8 +21,8 @@
     <table class="main-section__table disciplines">
         <thead>
         <tr>
-            <th class="disciplines-tbl-header"></th>
-            <th>Название дисциплины</th>
+            <th class="main-section__table col_checkbox"></th>
+            <th class="main-section__table col_discipline">Название дисциплины</th>
         </tr>
         </thead>
         <tbody>

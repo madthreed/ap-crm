@@ -24,26 +24,27 @@
 </head>
 <body>
 <div class="container">
-    <nav class="nav">
-        <a class="nav_button" href="/home">На главную</a>
-        <a class="nav_button" href="#" onclick="history.back();">Назад</a>
-    </nav>
+    <c:if test="${role != null}">
+        <nav class="nav">
+            <a class="nav_button" href="/home">На главную</a>
+            <a class="nav_button" href="#" onclick="history.back();">Назад</a>
+        </nav>
+
+        <div class="log-in-out">
+            <a class="nav_button" href="/logout">Выйти</a>
+        </div>
+    </c:if>
 
     <header class="header">
         <h1 class="header name">Система управления студентами и их успеваемостью</h1>
     </header>
 
-    <div class="log-in-out">
-        <a class="nav_button" href="">Выйти</a>
-    </div>
-
-
-    <jsp:include page="${currentPage}" />
+    <jsp:include page="${currentPage}"/>
     <%--body--%>
 
 </div>
 <footer class="footer">
-    <div>&copy; 2021 MadThreeD -"Java Junior" Avenue course</div>
+    <div>&copy; 2022 MadThreeD -"Java Junior" Avenue course</div>
 </footer>
 </body>
 </html>
