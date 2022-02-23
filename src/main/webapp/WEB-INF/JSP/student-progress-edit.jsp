@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <section class="main-section student-progress">
     <p class="main-section__title student-progress">
-        Отображена успеваемость для следующего студента:
+        Редактирование успеваемости для следующего студента:
     </p>
 
     <table class="main-section__table student-progress-sngd">
@@ -34,13 +35,15 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="mark" items="${marks}">
+        <c:forEach var="disciplineWithMarks" items="${disciplinesWithMarks}">
+<%--            <input type="hidden" name="disciplineId" value="disciplineWithMarks.discipline.id">--%>
+<%--            <input type="hidden" name="markId" value="disciplineWithMarks.mark.id">--%>
             <tr>
-                <td class="main-section__table col_discipline">${mark.discipline.name}</td>
-                    <%--                <td>--%>
-                    <%--                    <input class="main-section__table col_mark" type="number" value="${mark.mark}">--%>
-                    <%--                </td>--%>
-                <td class="main-section__table col_mark">${mark.mark}</td>
+                <td class="main-section__table col_discipline">${disciplineWithMarks.discipline.name}</td>
+
+                <td class="main-section__table col_mark">
+                        <input type="number" min="0" max="5" name="${disciplineWithMarks.mark.id}" placeholder="${disciplineWithMarks.mark.mark}">
+                </td>
             </tr>
         </c:forEach>
         </tbody>

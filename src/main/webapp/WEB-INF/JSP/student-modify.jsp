@@ -12,8 +12,8 @@
         <input class="main-section__form input" type="text" name="surname" value="${student.surname}"  required pattern="[A-Za-zА-Яа-я]+" maxlength="64">
         <input class="main-section__form input" type="text" name="name" value="${student.name}"  required pattern="[A-Za-zА-Яа-я]+" maxlength="64">
         <input class="main-section__form input" type="text" name="group" value="${student.group}"  required pattern="[0-9A-Za-zА-Яа-я-]+" maxlength="64">
-        <input class="main-section__form input" type="text" name="date" id="datepicker" required>
-<%--        value="${student.date}"--%>
+        <input class="main-section__form input" type="date" name="date" value="${student.date}" required>
+<%--        id="datepicker"--%>
         <input class="apply_button" type="submit" value="Применить">
     </form>
 </section>

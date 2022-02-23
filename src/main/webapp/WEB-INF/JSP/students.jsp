@@ -7,7 +7,7 @@
         <input class="i_button" onclick="progressStudent()" type="submit"
                value="Просмотреть успеваемость выбранного студента">
 
-        <c:if test="${role == 1}">
+<%--        <c:if test="${role == 1}">--%>
             <form method="get" action="/student-create">
                 <input class="i_button" type="submit" value="Создать студента...">
             </form>
@@ -16,7 +16,7 @@
                    value="Модифицировать выбранного студента...">
 
             <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
-        </c:if>
+<%--        </c:if>--%>
     </div>
 
     <p>Список студентов</p>

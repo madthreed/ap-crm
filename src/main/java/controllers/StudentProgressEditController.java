@@ -1,6 +1,7 @@
 package controllers;
 
 import database.DBServices;
+import dto.DisciplineWithMark;
 import entity.Discipline;
 import entity.Mark;
 import entity.Student;
@@ -21,33 +22,64 @@ public class StudentProgressEditController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DBServices dbServices = new DBServices();
 
-        String studentId = req.getParameter("studentId");
-        String termId = req.getParameter("termId");
+        List<Discipline> disciplinesByTerm = null;
+        List<Mark> marksByStudentAndTermId = null;
 
+        List<DisciplineWithMark> disciplinesWithMarks = new ArrayList<>();
+
+        String studentId = req.getParameter("studentId");
+        Student student = null;
+
+        String termId = req.getParameter("termId");
+        Term term = null;
 
         try {
-            Student student = dbServices.getStudentById(studentId);
+            student = dbServices.getStudentById(studentId);
             req.setAttribute("student", student);
-
-            List<Discipline> disciplinesByTerm = dbServices.getDisciplinesByTerm(termId);
-            List<Mark> marksByStudentAndTermId = dbServices.getMarksByStudentAndTermId(studentId, termId);
-
-            Map<Discipline, Mark> markMap = new HashMap<>();
-
-            for (Discipline discipline : disciplinesByTerm) {
-
-
-            }
-
-
-            req.setAttribute("currentPage", "student-progress-edit.jsp");
-            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
 
+        try {
+            term = dbServices.getTermById(termId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
+        }
+
+
+        try {
+            disciplinesByTerm = dbServices.getDisciplinesByTerm(termId);
+            req.setAttribute("disciplines", disciplinesByTerm);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
+        }
+
+
+        try {
+            marksByStudentAndTermId = dbServices.getMarksByStudentAndTermId(studentId, termId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (Discipline discipline : disciplinesByTerm) {
+            for (Mark mark : marksByStudentAndTermId) {
+                if (discipline.getId() == mark.getDiscipline().getId()) {
+                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, mark));
+                } else {
+                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, new Mark(student,term,discipline,0)));
+                }
+            }
+        }
+
+        req.setAttribute("disciplinesWithMarks", disciplinesWithMarks);
+        req.setAttribute("currentPage", "student-progress-edit.jsp");
+        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
 //        List<Mark> marks;
 //        Term selectedTerm;
 //

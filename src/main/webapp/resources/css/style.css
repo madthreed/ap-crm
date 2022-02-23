@@ -15,12 +15,22 @@ label {
 
 select {
     background: #e7e7e7;
-    color: #727171;
+    /*color: #c2c2c2;*/
+    color: #0021c3;
     border-radius: 4px;
     padding: 0 8px;
     border: solid 1px;
     outline: none;
+    width: inherit;
 }
+
+select::selection {
+    color: #625f5f;
+}
+
+/*p {*/
+/*    font-size: smaller;*/
+/*}*/
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -214,7 +224,8 @@ select {
 }
 
 .main-section__title {
-    padding-bottom: 18px;
+    padding-bottom: 4px;
+    text-align: center;
 }
 
 .main-section__title.student-progress {
@@ -403,6 +414,10 @@ select {
     /*height: 1.5em;*/
     /*margin-top: 18px;*/
     /*background: #333f9f;*/
+}
+
+.main-section__form.disciplineSelector {
+    width: inherit;
 }
 
 .main-section__form.input {

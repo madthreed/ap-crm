@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "TermController", urlPatterns = "/terms")
@@ -33,7 +34,8 @@ public class TermController extends HttpServlet {
             }
 
 
-            List<Term> terms = dbServices.getAllActiveTerms();
+            List<Term> terms = dbServices.getAllActiveTerms().stream().sorted(Comparator.comparing(Term::getName)).toList();
+
             req.setAttribute("terms", terms);
             req.setAttribute("selectedTerm", selectedTerm);
             req.setAttribute("disciplines", disciplines);

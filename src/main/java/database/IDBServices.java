@@ -32,9 +32,17 @@ public interface IDBServices {
 
     List<Discipline> getDisciplinesByTerm(String idTerm) throws SQLException;
 
+    List<Discipline> getDisciplinesWithMarksByStudentAndTerm(String studentId, String termId) throws SQLException;
+
     void createTerm(String duration, String idsDisc) throws SQLException;
 
-    void modifyTermById(String idTerm, String newDuration, String newIdsDisc) throws SQLException;
+    void modifyTermById(String idTerm, String newDuration, String newIdsDisc, String unblockedIdsTD) throws SQLException;
+
+    List<Discipline> getMarkBlockedDisciplinesByTerm(String id) throws SQLException;
+
+//    List<Discipline> getDisciplinesWithoutMarksByTerm(String id) throws SQLException;
+
+    String getTermDisciplinesWithoutMarksByTerm(String id) throws SQLException;
 
     List<Student> getAllActiveStudents() throws SQLException;
 
@@ -51,6 +59,7 @@ public interface IDBServices {
     boolean authUser(String login, String password, String role) throws SQLException;
 
     List<Mark> getMarksByStudentAndTermId(String studentId, String termId) throws SQLException;
+
 
 //    List<Mark> getAllMarksByTermId(String studentId) throws SQLException;
     //TODO еще не все

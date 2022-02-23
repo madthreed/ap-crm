@@ -27,23 +27,24 @@ public class DBServices implements IDBServices {
 
     @Override
     public String dateToDB(String date) {
-        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
-        Date dateFromUser = null;
-
-        try {
-            dateFromUser = format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return formatter.format(dateFromUser);
+        return date;
+//        DateFormat format = new SimpleDateFormat("mm/dd/yy", Locale.ENGLISH);
+//        Date dateFromUser = null;
+//
+//        try {
+//            dateFromUser = format.parse(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//        return formatter.format(dateFromUser);
     }
 
     @Override
     public String dateFromDB(String date) {
-        return null;
+        return date;
     }
 
     @Override
@@ -219,7 +220,7 @@ public class DBServices implements IDBServices {
 
         createConnection();
 
-        PreparedStatement stmt = connection.prepareStatement("SELECT discipline.id,discipline.discipline,discipline.status FROM discipline left join term_discipline on discipline.id=term_discipline.id_discipline left join term on term_discipline.id_term=term.id where term.id=?;");
+        PreparedStatement stmt = connection.prepareStatement("SELECT discipline.id,discipline.discipline,discipline.status FROM discipline left join term_discipline on discipline.id=term_discipline.id_discipline left join term on term_discipline.id_term=term.id where term.id=? and discipline.status = '1';");
         stmt.setString(1, idTerm);
         ResultSet rs = stmt.executeQuery();
 
@@ -232,6 +233,11 @@ public class DBServices implements IDBServices {
         }
 
         return disciplines;
+    }
+
+    @Override
+    public List<Discipline> getDisciplinesWithMarksByStudentAndTerm(String studentId, String termId) throws SQLException {
+        return null;
     }
 
 
@@ -270,24 +276,103 @@ public class DBServices implements IDBServices {
     }
 
     @Override
-    public void modifyTermById(String idTerm, String newDuration, String newIdsDisc) throws SQLException {
+    public void modifyTermById(String idTerm, String newDuration, String newIdsDisc, String unblockedIdsTD) throws SQLException {
         createConnection();
 
         PreparedStatement updateDuration = connection.prepareStatement("UPDATE term SET duration = ? WHERE id = ?;");
         updateDuration.setString(1, newDuration);
         updateDuration.setString(2, idTerm);
 
-        PreparedStatement deleteTD = connection.prepareStatement("DELETE FROM term_discipline WHERE id_term = ?");
-        deleteTD.setString(1, idTerm);
-
         Statement stmt = connection.createStatement();
-        for (String idDisc : newIdsDisc.split(" ")) {
-            stmt.addBatch("insert into term_discipline (id_term, id_discipline) values ('" + idTerm + "','" + idDisc + "');");
+
+        if (unblockedIdsTD.length() != 0) {
+            for (String idTd : unblockedIdsTD.split(" ")) {
+                stmt.addBatch("DELETE FROM term_discipline WHERE id = '" + idTd + "'");
+            }
+        }
+
+        if (newIdsDisc.length() != 0) {
+            for (String idDisc : newIdsDisc.split(" ")) {
+                stmt.addBatch("insert into term_discipline (id_term, id_discipline) values ('" + idTerm + "','" + idDisc + "');");
+            }
         }
 
         updateDuration.executeUpdate();
-        deleteTD.executeUpdate();
+//        deleteTD.executeUpdate();
         stmt.executeBatch();
+    }
+
+    @Override
+    public List<Discipline> getMarkBlockedDisciplinesByTerm(String id) throws SQLException {
+        ArrayList<Discipline> disciplines = new ArrayList<>();
+
+        createConnection();
+
+        PreparedStatement stmt = connection.prepareStatement("SELECT d.id,d.discipline,d.status FROM discipline d\n" +
+                "left join term_discipline td on td.id_discipline = d.id\n" +
+                "join mark m on m.id_term_discipline = td.id\n" +
+                "where td.id_term = ? and d.status = '1';");
+
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Discipline discipline = new Discipline();
+            discipline.setId(rs.getInt("id"));
+            discipline.setName(rs.getString("discipline"));
+            discipline.setStatus(rs.getInt("status"));
+            disciplines.add(discipline);
+        }
+
+        return disciplines;
+    }
+
+
+//    @Override
+//    public List<Discipline> getDisciplinesWithoutMarksByTerm(String id) throws SQLException {
+//        ArrayList<Discipline> disciplines = new ArrayList<>();
+//
+//        createConnection();
+//
+//        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM discipline d\n" +
+//                "left join term_discipline td on td.id_discipline = d.id\n" +
+//                "left join mark m on m.id_term_discipline = td.id\n" +
+//                "where td.id_term = ? and m.mark is null;");
+//
+//        stmt.setString(1, id);
+//        ResultSet rs = stmt.executeQuery();
+//
+//        while (rs.next()) {
+//            Discipline discipline = new Discipline();
+//            discipline.setId(rs.getInt("id"));
+//            discipline.setName(rs.getString("discipline"));
+//            discipline.setStatus(rs.getInt("status"));
+//            disciplines.add(discipline);
+//        }
+//
+//        return disciplines;
+//    }
+
+    @Override
+    public String getTermDisciplinesWithoutMarksByTerm(String id) throws SQLException {
+        StringBuilder termDisciplines = new StringBuilder();
+
+        createConnection();
+
+        PreparedStatement stmt = connection.prepareStatement("SELECT td.id FROM discipline d\n" +
+                "left join term_discipline td on td.id_discipline = d.id\n" +
+                "left join mark m on m.id_term_discipline = td.id\n" +
+                "where td.id_term = ? and d.status = '1' and m.mark is null;");
+
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            termDisciplines.append(rs.getInt("id")).append(" ");
+        }
+
+
+        return termDisciplines.toString().trim();
     }
 
     @Override

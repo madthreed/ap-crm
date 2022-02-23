@@ -2,8 +2,6 @@ package dto;
 
 import entity.Discipline;
 import entity.Mark;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 public class DisciplineWithMark {
     private Discipline discipline;
