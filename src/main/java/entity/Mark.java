@@ -19,6 +19,14 @@ public class Mark {
         this.mark = mark;
     }
 
+    public Mark(int id, Student student, Term term, Discipline discipline, int mark) {
+        this.id = id;
+        this.student = student;
+        this.term = term;
+        this.discipline = discipline;
+        this.mark = mark;
+    }
+
     public int getId() {
         return id;
     }

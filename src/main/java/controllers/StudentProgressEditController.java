@@ -72,11 +72,16 @@ public class StudentProgressEditController extends HttpServlet {
                 if (discipline.getId() == mark.getDiscipline().getId()) {
                     disciplinesWithMarks.add(new DisciplineWithMark(discipline, mark));
                 } else {
-                    Mark newMark = new Mark(student,term,discipline,0);
+//                    Mark newMark = new Mark(student,term,discipline,0);
+                    try {
+                        dbServices.createMark(student, term, discipline, 0);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        req.setAttribute("currentPage", "sqlerror.jsp");
+                        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
+                    }
 
-//                    new Mark(student,term,discipline,newMark)
-
-                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, newMark));
+//                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, newMark));
                 }
             }
         }
