@@ -60,7 +60,9 @@ public interface IDBServices {
 
     List<Mark> getMarksByStudentAndTermId(String studentId, String termId) throws SQLException;
 
-    void createMark(Student student,Term term,Discipline discipline, int mark) throws SQLException;
+    void createMark(Student student, Term term, Discipline discipline, int mark) throws SQLException;
+
+    void updateMark(Mark mark) throws SQLException;
 //    List<Mark> getAllMarksByTermId(String studentId) throws SQLException;
     //TODO еще не все
 }

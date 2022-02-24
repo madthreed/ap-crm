@@ -36,6 +36,8 @@
             </tr>
             </thead>
             <tbody>
+            <input type="hidden" name="termId" value="${disciplineWithMarks.mark.term.id}">
+            <input type="hidden" name="studentId" value="${student.id}">
             <c:forEach var="disciplineWithMarks" items="${disciplinesWithMarks}">
                 <input type="hidden" name="disciplineId" value="${disciplineWithMarks.discipline.id}">
                 <input type="hidden" name="markId" value="${disciplineWithMarks.mark.id}">
@@ -45,8 +47,8 @@
                     </td>
 
                     <td class="main-section__table col_mark">
-                        <input type="number" min="0" max="5" id="${disciplineWithMarks.mark.id}" name="marks"
-                               placeholder="${disciplineWithMarks.mark.mark}" value="${disciplineWithMarks.mark.mark}">
+                        <input type="number" min="0" max="5" name="marks" value="${disciplineWithMarks.mark.mark}">
+                            <%--   placeholder="${disciplineWithMarks.mark.mark}                     id="${disciplineWithMarks.mark.id}"--%>
                     </td>
                 </tr>
             </c:forEach>

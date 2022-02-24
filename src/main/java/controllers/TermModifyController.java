@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "TermModifyController", urlPatterns = "/term-modify")
 public class TermModifyController extends HttpServlet {
@@ -28,7 +29,7 @@ public class TermModifyController extends HttpServlet {
             List<Discipline> selectedDisciplines = dbServices.getDisciplinesByTerm(id);
 //            List<Discipline> blockedDisciplines = dbServices.getDisciplinesWithoutMarksByTerm(id);
 //            List<Discipline> unblockedDisciplines = dbServices.getDisciplinesWithoutMarksByTerm(id);
-            List<Discipline> allActiveDisciplines = dbServices.getAllActiveDisciplines().stream().sorted(Comparator.comparing(Discipline::getName)).toList();
+            List<Discipline> allActiveDisciplines = dbServices.getAllActiveDisciplines().stream().sorted(Comparator.comparing(Discipline::getName)).collect(Collectors.toList());
             List<Discipline> blockedDisciplines = dbServices.getMarkBlockedDisciplinesByTerm(id);
 
 

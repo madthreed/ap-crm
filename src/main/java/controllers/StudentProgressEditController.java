@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "StudentProgressEditController", urlPatterns = "/student-progress-edit")
 public class StudentProgressEditController extends HttpServlet {
@@ -24,8 +25,6 @@ public class StudentProgressEditController extends HttpServlet {
 
         List<Discipline> disciplinesByTerm = null;
         List<Mark> marksByStudentAndTermId = null;
-
-        List<DisciplineWithMark> disciplinesWithMarks = new ArrayList<>();
 
         String studentId = req.getParameter("studentId");
         Student student = null;
@@ -67,17 +66,22 @@ public class StudentProgressEditController extends HttpServlet {
             e.printStackTrace();
         }
 
-        for (Discipline discipline : disciplinesByTerm) {
-            for (Mark mark : marksByStudentAndTermId) {
-                if (discipline.getId() == mark.getDiscipline().getId()) {
-                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, mark));
-                } else {
-                    Mark newMark = new Mark(student,term,discipline,0);
-                    //                        dbServices.createMark(student, term, discipline, 0);
-                    disciplinesWithMarks.add(new DisciplineWithMark(discipline, newMark));
-                }
-            }
+        Map<Discipline, Mark> markMap = new HashMap<>();
+
+        for (Mark mark : marksByStudentAndTermId) {
+            markMap.put(mark.getDiscipline(), mark);
         }
+
+        for (Discipline discipline : disciplinesByTerm) {
+            markMap.putIfAbsent(discipline, new Mark(student, term, discipline, 0));
+        }
+
+        List<DisciplineWithMark> disciplinesWithMarks = new ArrayList<>();
+
+        disciplinesWithMarks = markMap.entrySet().stream()
+//                .peek(disciplineMarkEntry -> System.out.println(disciplineMarkEntry.getKey() + " : "+disciplineMarkEntry.getValue()))
+                .map((k) -> new DisciplineWithMark(k.getKey(), k.getValue()))
+                .collect(Collectors.toList());
 
         req.setAttribute("disciplinesWithMarks", disciplinesWithMarks);
         req.setAttribute("currentPage", "student-progress-edit.jsp");
@@ -86,9 +90,33 @@ public class StudentProgressEditController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DBServices dbServices = new DBServices();
+
+        String studentId = req.getParameter("studentId");
+        String termId = req.getParameter("termId");
+
         String[] marks = req.getParameterValues("marks");
         String[] disciplineIds = req.getParameterValues("disciplineId");
         String[] markIds = req.getParameterValues("markId");
+
+        try {
+            Student student = dbServices.getStudentById(studentId);
+            Term term = dbServices.getTermById(String.valueOf(termId));
+
+            for (int i = 0; i < markIds.length; i++) {
+                if (markIds[i].equals("0")) {
+                    Discipline discipline = dbServices.getDisciplineById(String.valueOf(disciplineIds[i]));
+                    dbServices.createMark(student, term, discipline, Integer.parseInt(marks[i]));
+                } else {
+                    Discipline discipline = dbServices.getDisciplineById(String.valueOf(disciplineIds[i]));
+                    dbServices.updateMark(new Mark(Integer.parseInt(markIds[i]),student,term,discipline,Integer.parseInt(marks[i])));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
+        }
 
         resp.sendRedirect("/students");
     }

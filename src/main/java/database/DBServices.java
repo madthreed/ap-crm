@@ -518,9 +518,6 @@ public class DBServices implements IDBServices {
     @Override
     public void createMark(Student student, Term term, Discipline discipline, int markInt) throws SQLException {
         int tdId = 0;
-        int markId = 0;
-        Mark mark = null;
-
 
         createConnection();
         PreparedStatement tdIdStmt = connection.prepareStatement("select td.id from term_discipline td where id_term = ? and id_discipline = ?;");
@@ -538,29 +535,29 @@ public class DBServices implements IDBServices {
         createMarkStmt.setString(3, String.valueOf(markInt));
 
         createMarkStmt.executeUpdate();
+    }
 
-        ResultSet rs2 = createMarkStmt.getGeneratedKeys();
-        while (rs2.next()) {
-            int markID = rs2.getInt("id");
+    @Override
+    public void updateMark(Mark mark) throws SQLException {
+        int tdId = 0;
+
+        createConnection();
+        PreparedStatement tdIdStmt = connection.prepareStatement("select td.id from term_discipline td where id_term = ? and id_discipline = ?;");
+        tdIdStmt.setInt(1, mark.getTerm().getId());
+        tdIdStmt.setInt(2, mark.getDiscipline().getId());
+
+        ResultSet rs = tdIdStmt.executeQuery();
+        while (rs.next()) {
+            tdId = rs.getInt("id");
         }
 
-        mark = new Mark();
-
-        mark.setId(markId);
-        mark.setDiscipline(discipline);
-        mark.setStudent(student);
-        mark.setTerm(term);
-        mark.setMark(markInt);
-//        }
-
-//        Mark mark1 = new Mark(markId, student, term, discipline, 0);
-
-
-//        return mark;
-//        select td.id from term_discipline td where id_term = '26' and id_discipline='44';
-//        INSERT INTO mark (`id_student`, `id_term_discipline`, `mark`) VALUES ('15', '66', '2');
-
+        PreparedStatement createMarkStmt = connection.prepareStatement("update mark set `id_student` = ?, `id_term_discipline` = ?, `mark` = ? where id = ?;");
+        createMarkStmt.setInt(1, mark.getStudent().getId());
+        createMarkStmt.setInt(2, tdId);
+        createMarkStmt.setInt(3, mark.getMark());
+        createMarkStmt.setInt(4, mark.getId());
     }
+}
 
 //    @Override
 //    public List<Mark> getAllMarksByTermId(String studentId) throws SQLException {
@@ -586,4 +583,4 @@ public class DBServices implements IDBServices {
 //
 //        return marks.stream().sorted((m1,m2)->m1.getMark()- m2.getMark()).collect(Collectors.toList());
 //    }
-}
+

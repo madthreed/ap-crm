@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "TermController", urlPatterns = "/terms")
 public class TermController extends HttpServlet {
@@ -34,7 +35,7 @@ public class TermController extends HttpServlet {
             }
 
 
-            List<Term> terms = dbServices.getAllActiveTerms().stream().sorted(Comparator.comparing(Term::getName)).toList();
+            List<Term> terms = dbServices.getAllActiveTerms().stream().sorted(Comparator.comparing(Term::getName)).collect(Collectors.toList());
 
             req.setAttribute("terms", terms);
             req.setAttribute("selectedTerm", selectedTerm);
