@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "StudentProgressController", urlPatterns = "/student-progress")
 public class StudentProgressController extends HttpServlet {
@@ -27,7 +28,7 @@ public class StudentProgressController extends HttpServlet {
             String studentId = req.getParameter("progressStudentId");
             Student student = dbServices.getStudentById(studentId);
 
-            List<Term> terms = dbServices.getAllActiveTerms();
+            List<Term> terms = dbServices.getAllActiveTerms().stream().sorted(Comparator.comparing(Term::getName)).collect(Collectors.toList());
 
             String selected = req.getParameter("termSelector");
             if (selected == null) {

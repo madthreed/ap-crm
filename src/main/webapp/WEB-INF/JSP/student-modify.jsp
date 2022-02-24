@@ -25,6 +25,10 @@
             </form>
 
 
+            <form method="get" action="/students">
+                <input class="apply_button" type="submit" value="Вернуться к списку">
+            </form>
+
         </c:when>
         <c:otherwise>
             <p style="color:#ff0000;" class="main-section__title">Вам сюда нельзя!!!</p>

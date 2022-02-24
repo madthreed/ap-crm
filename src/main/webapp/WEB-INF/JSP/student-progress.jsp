@@ -62,13 +62,17 @@
             <input class="apply_button" type="submit" value="Выбрать">
         </form>
 
-        <c:if test="${role == 1}">
+        <c:if test="${role == 1 || role == 2}">
             <form method="get" action="/student-progress-edit">
                 <input type="hidden" name="studentId" value="${student.id}">
                 <input type="hidden" name="termId" value="${selectedTerm.id}">
                 <input class="apply_button" type="submit" value="Редактировать оценки">
             </form>
         </c:if>
+
+        <form method="get" action="/students">
+            <input class="apply_button" type="submit" value="Вернуться к списку">
+        </form>
 
         <p>Средняя оценка за семестр: ${averageMark}</p>
     </div>

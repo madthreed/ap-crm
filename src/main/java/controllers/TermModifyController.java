@@ -27,8 +27,6 @@ public class TermModifyController extends HttpServlet {
         try {
             Term term = dbServices.getTermById(id);
             List<Discipline> selectedDisciplines = dbServices.getDisciplinesByTerm(id);
-//            List<Discipline> blockedDisciplines = dbServices.getDisciplinesWithoutMarksByTerm(id);
-//            List<Discipline> unblockedDisciplines = dbServices.getDisciplinesWithoutMarksByTerm(id);
             List<Discipline> allActiveDisciplines = dbServices.getAllActiveDisciplines().stream().sorted(Comparator.comparing(Discipline::getName)).collect(Collectors.toList());
             List<Discipline> blockedDisciplines = dbServices.getMarkBlockedDisciplinesByTerm(id);
 

@@ -4,12 +4,9 @@ import constants.DbConfig;
 import entity.*;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DBServices implements IDBServices {
     private Connection connection;
@@ -88,7 +85,6 @@ public class DBServices implements IDBServices {
         stmt.execute();
     }
 
-    //TODO Change STATUS=0, not DELETE
     @Override
     public void deleteDisciplineById(String id) throws SQLException {
         createConnection();
@@ -243,14 +239,14 @@ public class DBServices implements IDBServices {
         Term lastActiveTerm = getLastActiveTerm();
 
         int nextTerm;
-//        int nextTerm = Integer.parseInt(lastActiveTerm.getName().split(" ")[1]) + 1;
+
         if (lastActiveTerm == null) {
             nextTerm = 1;
         } else {
             nextTerm = Integer.parseInt(lastActiveTerm.getName()) + 1;
         }
 
-        stmt.execute("insert into term (`term`, `duration`) values ('" + nextTerm + "', '" + duration + "')");
+        stmt.execute("insert into term (`term`, `duration`) values ('" + nextTerm + "', '" + duration + "')"); //todo refactor
 
         lastActiveTerm = getLastActiveTerm();
 
@@ -284,7 +280,6 @@ public class DBServices implements IDBServices {
         }
 
         updateDuration.executeUpdate();
-//        deleteTD.executeUpdate();
         stmt.executeBatch();
     }
 
@@ -313,31 +308,6 @@ public class DBServices implements IDBServices {
         return disciplines;
     }
 
-
-//    @Override
-//    public List<Discipline> getDisciplinesWithoutMarksByTerm(String id) throws SQLException {
-//        ArrayList<Discipline> disciplines = new ArrayList<>();
-//
-//        createConnection();
-//
-//        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM discipline d\n" +
-//                "left join term_discipline td on td.id_discipline = d.id\n" +
-//                "left join mark m on m.id_term_discipline = td.id\n" +
-//                "where td.id_term = ? and m.mark is null;");
-//
-//        stmt.setString(1, id);
-//        ResultSet rs = stmt.executeQuery();
-//
-//        while (rs.next()) {
-//            Discipline discipline = new Discipline();
-//            discipline.setId(rs.getInt("id"));
-//            discipline.setName(rs.getString("discipline"));
-//            discipline.setStatus(rs.getInt("status"));
-//            disciplines.add(discipline);
-//        }
-//
-//        return disciplines;
-//    }
 
     @Override
     public String getTermDisciplinesWithoutMarksByTerm(String id) throws SQLException {
@@ -506,7 +476,7 @@ public class DBServices implements IDBServices {
         int tdId = 0;
 
         createConnection();
-        PreparedStatement tdIdStmt = connection.prepareStatement("select td.id from term_discipline td where id_term = ? and id_discipline = ?;");
+        PreparedStatement tdIdStmt = connection.prepareStatement("select td.id from term_discipline td where id_term = ? and id_discipline = ?;"); //todo separate
         tdIdStmt.setString(1, String.valueOf(term.getId()));
         tdIdStmt.setString(2, String.valueOf(discipline.getId()));
 
@@ -532,29 +502,4 @@ public class DBServices implements IDBServices {
         stmt.executeUpdate();
     }
 }
-
-//    @Override
-//    public List<Mark> getAllMarksByTermId(String studentId) throws SQLException {
-//        List<Mark> marks = new LinkedList<>();
-//
-//        createConnection();
-////        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM mark m left join term_discipline td on td.id = m.id_term_discipline where m.id_student = ?;");
-//        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM term t left join term_discipline td on td.id_term = t.id left join discipline d on d.id = td.id_discipline left join mark m on m.id_term_discipline = td.id where t.status = '1' and d.status = '1';");
-//
-//        stmt.setString(1, studentId);
-//        ResultSet rs = stmt.executeQuery();
-//
-//        while (rs.next()) {
-//            Mark mark = new Mark();
-//
-//            mark.setId(rs.getInt("id"));
-//            mark.setStudent(getStudentById(rs.getString("id_student")));
-//            mark.setTerm(getTermById(rs.getString("id_term")));
-//            mark.setDiscipline(getDisciplineById(rs.getString("id_discipline")));
-//            mark.setMark(rs.getInt("mark"));
-//            marks.add(mark);
-//        }
-//
-//        return marks.stream().sorted((m1,m2)->m1.getMark()- m2.getMark()).collect(Collectors.toList());
-//    }
 

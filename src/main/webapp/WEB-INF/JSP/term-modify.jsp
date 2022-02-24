@@ -9,7 +9,8 @@
         <c:when test="${role == 1}">
 
 
-            <p class="main-section__title">Отредактируйте длительность и дисциплины и нажмите кнопку "Применить".</p>
+            <p class="main-section__title">Отредактируйте длительность и спикок дисциплин и нажмите кнопку
+                "Применить".</p>
             <p style="font-size: x-small">Для изменения доступны только те дисциплины, по которым в семестре не
                 выставлены
                 оценки</p>
@@ -39,9 +40,19 @@
                         </c:choose>
                     </c:forEach>
                 </select>
-                <input class="apply_button" type="button" onclick="clearSelectedDisciplines();" value="Очистить"/>
-                <input class="apply_button" type="submit" value="Применить">
+
+                <div>
+                    <input class="apply_button" type="button" onclick="clearSelectedDisciplines();" value="Очистить"/>
+                </div>
+                <div>
+                    <input class="apply_button" type="submit" value="Применить">
+                </div>
             </form>
+
+            <form method="get" action="/terms">
+                <input class="apply_button" type="submit" value="Вернуться к списку">
+            </form>
+
 
 
         </c:when>
