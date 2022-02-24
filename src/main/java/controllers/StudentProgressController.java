@@ -44,7 +44,7 @@ public class StudentProgressController extends HttpServlet {
                     .average().orElse(0.0);
 
 
-            req.setAttribute("averageMark", averageMark);
+            req.setAttribute("averageMark", String.format("%.2f", averageMark));
             req.setAttribute("terms", terms);
             req.setAttribute("selectedTerm", selectedTerm);
             req.setAttribute("marks", marks);

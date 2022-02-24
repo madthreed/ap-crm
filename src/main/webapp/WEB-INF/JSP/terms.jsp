@@ -8,10 +8,16 @@
             <form method="get" action="/term-create">
                 <input class="i_button" type="submit" value="Создать семестр...">
             </form>
-
             <input class="i_button" onclick="modifyTerm()" type="submit" value="Модифицировать текущий семестр...">
-
             <input class="i_button" onclick="deleteTerm()" type="submit" value="Удалить текущий семестр...">
+
+            <form id="deleteTermForm" action="/terms" method="post">
+                <input type="hidden" id="deleteTermHiddenId" name="deleteTermHiddenId">
+            </form>
+
+            <form id="modifyTermForm" action="/term-modify" method="get">
+                <input type="hidden" id="modifyTermHiddenId" name="modifyTermHiddenId">
+            </form>
         </c:if>
     </div>
 
@@ -65,11 +71,3 @@
         </tbody>
     </table>
 </section>
-
-<form id="deleteTermForm" action="/terms" method="post">
-    <input type="hidden" id="deleteTermHiddenId" name="deleteTermHiddenId">
-</form>
-
-<form id="modifyTermForm" action="/term-modify" method="get">
-    <input type="hidden" id="modifyTermHiddenId" name="modifyTermHiddenId">
-</form>

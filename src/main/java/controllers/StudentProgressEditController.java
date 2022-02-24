@@ -92,16 +92,17 @@ public class StudentProgressEditController extends HttpServlet {
                     dbServices.updateMark(new Mark(Integer.parseInt(markIds[i]), student, term, discipline, Integer.parseInt(marks[i])));
                 }
             }
+
+//            req.setAttribute("student", student);
+//            req.setAttribute("currentPage", "student-progress.jsp");
+//            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
+
+            resp.sendRedirect("/student-progress?progressStudentId="+studentId+"");
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
 
-        req.setAttribute("student", studentId);
-        req.setAttribute("currentPage", "student-progress.jsp");
-        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
-
-//        resp.sendRedirect("/students");
     }
 }

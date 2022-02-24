@@ -3,6 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <section class="main-section create-modify">
+    <c:choose>
+        <c:when test="${role == 1}">
+
+
+
     <p class="main-section__title">
         Для создания студента заполните все поля и нажмите кнопку "Создать".
     </p>
@@ -15,4 +20,11 @@
                placeholder="Дата поступления" required>
         <input class="apply_button" type="submit" value="Создать">
     </form>
+
+
+        </c:when>
+        <c:otherwise>
+            <p style="color:#ff0000;" class="main-section__title">Вам сюда нельзя!!!</p>
+        </c:otherwise>
+    </c:choose>
 </section>

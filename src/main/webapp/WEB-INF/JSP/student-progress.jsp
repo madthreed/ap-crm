@@ -37,9 +37,6 @@
         <c:forEach var="mark" items="${marks}">
             <tr>
                 <td class="main-section__table col_discipline">${mark.discipline.name}</td>
-<%--                <td>--%>
-<%--                    <input class="main-section__table col_mark" type="number" value="${mark.mark}">--%>
-<%--                </td>--%>
                 <td class="main-section__table col_mark">${mark.mark}</td>
             </tr>
         </c:forEach>
@@ -65,11 +62,13 @@
             <input class="apply_button" type="submit" value="Выбрать">
         </form>
 
-        <form method="get" action="/student-progress-edit">
-            <input type="hidden" name="studentId" value="${student.id}">
-            <input type="hidden" name="termId" value="${selectedTerm.id}">
-            <input class="apply_button" type="submit" value="Редактировать оценки">
-        </form>
+        <c:if test="${role == 1}">
+            <form method="get" action="/student-progress-edit">
+                <input type="hidden" name="studentId" value="${student.id}">
+                <input type="hidden" name="termId" value="${selectedTerm.id}">
+                <input class="apply_button" type="submit" value="Редактировать оценки">
+            </form>
+        </c:if>
 
         <p>Средняя оценка за семестр: ${averageMark}</p>
     </div>
