@@ -26,23 +26,6 @@
         </tbody>
     </table>
 
-    <table class="main-section__table student-progress-disciplines">
-        <thead>
-        <tr>
-            <th class="main-section__table col_discipline">Дисциплина</th>
-            <th class="main-section__table col_mark">Оценка</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="mark" items="${marks}">
-            <tr>
-                <td class="main-section__table col_discipline">${mark.discipline.name}</td>
-                <td class="main-section__table col_mark">${mark.mark}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-
     <div class="main-section__student-progress-termlist">
         <span>Выбрать семестр</span>
         <form method="get" action="/student-progress">
@@ -76,4 +59,22 @@
 
         <p>Средняя оценка за семестр: ${averageMark}</p>
     </div>
+
+
+    <table class="main-section__table student-progress-disciplines">
+        <thead>
+        <tr>
+            <th class="main-section__table col_discipline">Дисциплина</th>
+            <th class="main-section__table col_mark">Оценка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="mark" items="${marks}">
+            <tr>
+                <td class="main-section__table col_discipline">${mark.discipline.name}</td>
+                <td class="main-section__table col_mark">${mark.mark}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </section>

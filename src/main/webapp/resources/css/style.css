@@ -110,7 +110,7 @@ select::selection {
     height: fit-content;
     cursor: pointer;
 
-    min-width: 340px;
+    min-width: 350px;
 }
 
 .i_button:hover {
@@ -307,59 +307,58 @@ select::selection {
 
 .main-section__table tr:nth-child(2n-1) {
     background: #d7d7d7;
+    height: 1rem;
+}
+
+.main-section__table tr {
+    height: 1rem;
 }
 
 .main-section__table.col_checkbox {
     vertical-align: middle;
     text-align: center;
     width: 10%;
-    height: 3em;
+    /*height: 3em;*/
 }
 
 .main-section__table.col_surname {
     vertical-align: middle;
     text-align: center;
-
     width: 40%;
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_name {
     vertical-align: middle;
     text-align: center;
-
     width: 30%;
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_group {
     vertical-align: middle;
     text-align: center;
-
     width: 10%;
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_date {
     vertical-align: middle;
     text-align: center;
-
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_discipline {
     vertical-align: middle;
     text-align: center;
-
     width: 70%;
-    height: 3em;
+    /*height: 3em;*/
 }
 
 .main-section__table.col_mark {
     vertical-align: middle;
     text-align: center;
-
-    height: 3em;
+    /*height: 3em;*/
 }
 
 /*.students-tbl-header {*/
@@ -385,11 +384,13 @@ select::selection {
 .main-section__table.terms {
     grid-row: 3;
     grid-column: 1;
+    /*min-width: 300px;*/
 }
 
 .main-section__table.disciplines {
     grid-row: 2;
     grid-column: 1;
+    /*min-width: 300px;*/
 }
 
 .main-section__table.student-progress-sngd {
@@ -468,13 +469,14 @@ select::selection {
 
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    justify-content: left;
+    justify-content: center;
 }
 
 .main-section__menu.students {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     /*display: grid;*/
     /*grid-template-columns: 1fr 1fr;*/
     /*width: fit-content;*/
@@ -488,7 +490,7 @@ select::selection {
 
     display: grid;
     /*grid-template-rows: 1fr 1fr 1fr;*/
-    justify-content: left;
+    justify-content: center;
 }
 
 /*-------------------------------------------*/
@@ -513,7 +515,7 @@ select::selection {
     background: darkgrey
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1080px) {
     .container {
         display: grid;
         font-size: x-small;
@@ -554,5 +556,29 @@ select::selection {
 
     .main-section__table {
         margin-top: 0;
+    }
+
+    .main-section.terms{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-section.students{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-section.disciplines{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-section.student-progress{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .i_button {
+        min-width: 220px;
     }
 }
