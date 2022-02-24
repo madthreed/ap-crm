@@ -5,12 +5,8 @@
 }
 
 body {
-    width: 90%;
-    margin: 5px auto auto;
-}
-
-p {
-    margin: 0 8px;
+    /*width: 100%;*/
+    margin: 8px 8px;
 }
 
 label {
@@ -18,14 +14,24 @@ label {
 }
 
 select {
-    border-style: none;
+    background: #e7e7e7;
+    /*color: #c2c2c2;*/
+    color: #0021c3;
     border-radius: 4px;
-    /* background: transparent; */
-    /*background: linear-gradient(45deg, transparent 50%, blue 50%);*/
-    /*linear-gradient(135 deg, transparent 50 %, blue 50 %);*/
-    /*linear-gradient(to right, skyblue, skyblue);*/
-
+    padding: 0 8px;
+    border: solid 1px;
+    outline: none;
+    width: inherit;
+    text-align: center;
 }
+
+select::selection {
+    color: #625f5f;
+}
+
+/*p {*/
+/*    font-size: smaller;*/
+/*}*/
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -56,6 +62,32 @@ select {
 }
 
 .a_button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+
+    /*background: rgb(177, 198, 237);*/
+    /*border-radius: 5px;*/
+}
+
+.apply_button {
+    background: #727171;
+    color: #fdfdfd;
+    font-size: 0.8em;
+    font-weight: bold;
+    border: none;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    height: fit-content;
+    cursor: pointer;
+
+    min-width: 100px;
+}
+
+.apply_button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
 
@@ -122,12 +154,11 @@ select {
     background: #ececec;
     display: grid;
     grid-template-columns: minmax(120px, 200px) auto minmax(120px, 200px);
-    grid-template-rows: max-content;
-    height: 100%;
+    grid-template-rows: max-content min-content;
+    height: 95vh;
     border-radius: 12px;
-    padding-bottom: 6px;
-    padding-top: 6px;
-    margin-bottom: 32px;
+    padding: 6px 6px;
+    /*margin-bottom: 32px;*/
 }
 
 .nav {
@@ -176,7 +207,7 @@ select {
     /*width: 90%;*/
     width: 100%;
     height: fit-content;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     transform: translate(-50%, 0);
     font-size: 0.8em;
     font-weight: bold;
@@ -194,7 +225,8 @@ select {
 }
 
 .main-section__title {
-    padding-bottom: 18px;
+    padding-bottom: 4px;
+    text-align: center;
 }
 
 .main-section__title.student-progress {
@@ -205,6 +237,11 @@ select {
 
 /*-------------------------------------------*/
 /**/
+.main-section.create-modify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .main-section.students {
     display: block;
@@ -223,20 +260,6 @@ select {
 .main-section.terms {
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
-
-.term-selector {
-    background: #727171;
-    color: #fff;
-    border-radius: 4px;
-    padding: 0 8px;
-}
-
-.discipline-selector {
-    background: #727171;
-    color: #fff;
-    border-radius: 4px;
-    padding: 0 8px;
 }
 
 /*-------------------------------------------*/
@@ -282,7 +305,7 @@ select {
     padding: 2px 6px;
 }
 
-.main-section__table tr:nth-child(2n) {
+.main-section__table tr:nth-child(2n-1) {
     background: #d7d7d7;
 }
 
@@ -290,73 +313,71 @@ select {
     vertical-align: middle;
     text-align: center;
     width: 10%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_surname {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
     width: 40%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_name {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
     width: 30%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_group {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
     width: 10%;
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_date {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
-    height: 2em;
+    height: 3em;
 }
 
 .main-section__table.col_discipline {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
-    height: 2em;
+    width: 70%;
+    height: 3em;
 }
 
 .main-section__table.col_mark {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 
-    height: 2em;
+    height: 3em;
 }
 
-.students-tbl-header {
-    height: 2em;
-}
+/*.students-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
-.student-progress-sngd-tbl-header {
-    height: 2em;
-}
 
-.student-progress-disciplines-tbl-header {
-    height: 2em;
-}
+/*.student-progress-disciplines-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
-.disciplines-tbl-header {
-    height: 2em;
-}
+/*.disciplines-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
-.terms-tbl-header {
-    height: 2em;
-}
+/*.terms-tbl-header {*/
+/*    height: 2em;*/
+/*}*/
 
 .main-section__table.students {
 }
@@ -385,35 +406,33 @@ select {
 /**/
 
 .main-section__form {
-    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 14rem;
     margin: 8px 0;
     /*height: 1.5em;*/
     /*margin-top: 18px;*/
     /*background: #333f9f;*/
 }
 
-/*.main-section__form.annotation {*/
-/*    !*background: brown;*!*/
-/*    text-align: left;*/
-/*    vertical-align: top;*/
-/*    font-size: smaller;*/
-/*    padding-bottom: 9px;*/
-/*}*/
-
-/*.main-section__form.data {*/
-/*    vertical-align: top;*/
-/*}*/
+.main-section__form.disciplineSelector {
+    width: inherit;
+}
 
 .main-section__form.input {
     border: none;
     border-bottom: 1px solid rgb(190, 174, 174);
-    background: transparent;
+    background: #ececec;
+
     outline: none;
 
     /*height: 18px;*/
     width: 100%;
     font-weight: bolder;
     vertical-align: top;
+    text-align: center;
 }
 
 .main-section__form.input:focus {
@@ -422,7 +441,15 @@ select {
 }
 
 .main-section__form.input::selection {
-    background: #ffaaaa;
+    color: #ffaaaa;
+}
+
+.main-section__form.input:invalid {
+    background: #fdd; /* Красный цвет фона */
+}
+
+.main-section__form.input:valid {
+    background: #ececec;
 }
 
 /*-------------------------------------------*/

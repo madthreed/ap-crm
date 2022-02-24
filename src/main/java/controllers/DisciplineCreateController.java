@@ -14,7 +14,8 @@ import java.sql.SQLException;
 public class DisciplineCreateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("./WEB-INF/JSP/discipline-create.jsp").forward(req, resp);
+        req.setAttribute("currentPage", "discipline-create.jsp");
+        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
     }
 
     @Override
@@ -22,10 +23,13 @@ public class DisciplineCreateController extends HttpServlet {
         String name = req.getParameter("name");
 
         DBServices dbServices = new DBServices();
+
         try {
             dbServices.createDiscipline(name);
         } catch (SQLException e) {
-            req.getRequestDispatcher("./WEB-INF/JSP/sqlerror.jsp").forward(req, resp);
+            e.printStackTrace();
+            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
 
         resp.sendRedirect("/disciplines");

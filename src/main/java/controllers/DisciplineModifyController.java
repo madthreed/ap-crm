@@ -1,8 +1,7 @@
 package controllers;
 
 import database.DBServices;
-import entity.Student;
-import entity.Term;
+import entity.Discipline;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
-@WebServlet(name = "StudentController", urlPatterns = "/students")
-public class StudentController extends HttpServlet {
+@WebServlet(name = "DisciplineModifyController", urlPatterns = "/discipline-modify")
+public class DisciplineModifyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("modifyDisciplineHiddenId");
+
         DBServices dbServices = new DBServices();
 
         try {
-            List<Student> students = dbServices.getAllActiveStudents().stream().sorted(Comparator.comparing(Student::getName)).collect(Collectors.toList());;
+            Discipline discipline = dbServices.getDisciplineById(id);
 
-            req.setAttribute("students", students);
-            req.setAttribute("currentPage", "students.jsp");
+            req.setAttribute("discipline", discipline);
+            req.setAttribute("currentPage", "discipline-modify.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,21 +34,19 @@ public class StudentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String ids = req.getParameter("deleteStudentHiddenId");
-        String[] idsDelete = ids.split(" ");
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
 
         DBServices dbServices = new DBServices();
 
-        for (String id : idsDelete) {
-            try {
-                dbServices.deleteStudentById(id);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                req.setAttribute("currentPage", "sqlerror.jsp");
-                req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
-            }
+        try {
+            dbServices.modifyDisciplineById(id, name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
 
-        resp.sendRedirect("/students");
+        resp.sendRedirect("/disciplines");
     }
 }

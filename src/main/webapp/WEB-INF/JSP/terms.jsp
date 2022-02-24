@@ -1,78 +1,73 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Terms List</title>
-    <link rel="stylesheet" href="../../resources/css/fonts.css">
-    <link rel="stylesheet" href="../../resources/css/style.css">
-</head>
-<body>
+<section class="main-section terms">
+    <div class="main-section__menu terms">
+        <c:if test="${role == 1}">
+            <form method="get" action="/term-create">
+                <input class="i_button" type="submit" value="Создать семестр...">
+            </form>
+            <input class="i_button" onclick="modifyTerm()" type="submit" value="Модифицировать текущий семестр...">
+            <input class="i_button" onclick="deleteTerm()" type="submit" value="Удалить текущий семестр...">
 
-<div class="container">
-    <nav class="nav">
-        <a class="nav_button" href="/home">На главную</a>
-        <a class="nav_button" href="#" onclick="history.back();">Назад</a>
-    </nav>
+            <form id="deleteTermForm" action="/terms" method="post">
+                <input type="hidden" id="deleteTermHiddenId" name="deleteTermHiddenId">
+            </form>
 
-    <div class="log-in-out">
-        <a class="nav_button" href="">Выйти</a>
+            <form id="modifyTermForm" action="/term-modify" method="get">
+                <input type="hidden" id="modifyTermHiddenId" name="modifyTermHiddenId">
+            </form>
+        </c:if>
     </div>
 
-    <header class="header">
-        <h1 class="header name">Система управления студентами и их успеваемостью</h1>
-    </header>
-
-    <section class="main-section terms">
-        <div class="main-section__menu terms">
-            <form method="get" action="/term-create">
-                <input class="i_button disabled" type="submit" value="Создать семестр...">
-            </form>
-            <form method="get" action="/term-modify">
-                <input class="i_button disabled" type="submit" value="Модифицировать текущий семестр...">
-            </form>
-            <form method="get" action="/term-delete">
-                <input class="i_button disabled" type="submit" value="Удалить текущий семестр...">
-            </form>
-        </div>
-
-        <div class="main-section__terms-termslist">
-            <span>Выбрать семестр</span>
-            <select class="term-selector" name="" required>
+    <div class="main-section__terms-termslist">
+        <span>Выбрать семестр</span>
+        <form method="get" action="/terms">
+            <select name="termSelector" id="termSelector" required>
                 <c:forEach var="term" items="${terms}">
-                <option name="selected" value="${term.id}">${term.name}
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${term.id == selectedTerm.id}">
+                            <option selected value="${term.id}">${term.name}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${term.id}">${term.name}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
             </select>
-            <input class="i_button disabled" type="submit" name="select" value="Выбрать">
-        </div>
+            <input class="apply_button" type="submit" value="Выбрать">
+        </form>
 
-        <p>Длительность семестра: 24 недели</p>
+        <p>Длительность семестра: ${selectedTerm.duration}
+            <c:choose>
+                <c:when test="${selectedTerm.duration % 10 == 1}">
+                    <span>неделя</span>
+                </c:when>
+                <c:when test="${selectedTerm.duration % 10 == 2 || selectedTerm.duration % 10 == 3 || selectedTerm.duration % 10 == 4}">
+                    <span>недели</span>
+                </c:when>
+                <c:otherwise>
+                    <span>недель</span>
+                </c:otherwise>
+            </c:choose>
+        </p>
+    </div>
 
-        <p>Список дисциплин семестра</p>
-
-        <%--        <div class="main-section__table_overflow">--%>
-        <table class="main-section__table terms">
-            <thead>
+    <p>Список дисциплин семестра</p>
+    <%--        <div class="main-section__table_overflow">--%>
+    <table class="main-section__table terms">
+        <thead>
+        <tr>
+            <th class="main-section__table col_discipline">Название дисциплины</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="discipline" items="${disciplines}">
             <tr>
-                <th class="terms-tbl-header">Название дисциплины</th>
+                <td class="main-section__table col_discipline">${discipline.name}</td>
             </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="main-section__table col_discipline">Высшая математика</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <footer class="footer">
-        <div>&copy; 2021 MadThreeD "Java Junior" Avenue course</div>
-    </footer>
-</div>
-</body>
-</html>
+        </c:forEach>
+        </tbody>
+    </table>
+</section>
