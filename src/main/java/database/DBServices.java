@@ -541,7 +541,7 @@ public class DBServices implements IDBServices {
 
         ResultSet rs2 = createMarkStmt.getGeneratedKeys();
         while (rs2.next()) {
-            long markID = rs2.getLong(1);
+            int markID = rs2.getInt("id");
         }
 
         mark = new Mark();

@@ -46,7 +46,7 @@
 
                     <td class="main-section__table col_mark">
                         <input type="number" min="0" max="5" id="${disciplineWithMarks.mark.id}" name="marks"
-                               placeholder="${disciplineWithMarks.mark.mark}">
+                               placeholder="${disciplineWithMarks.mark.mark}" value="${disciplineWithMarks.mark.mark}">
                     </td>
                 </tr>
             </c:forEach>
