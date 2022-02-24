@@ -56,5 +56,5 @@
 </form>
 
 <form id="progressStudentForm" action="/student-progress" method="get">
-    <input type="hidden" id="progressStudentHiddenId" name="progressStudentHiddenId">
+    <input type="hidden" id="progressStudentId" name="progressStudentId">
 </form>

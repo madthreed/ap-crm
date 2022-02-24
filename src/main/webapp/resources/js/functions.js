@@ -9,7 +9,7 @@ function progressStudent() {
         return;
     }
 
-    document.getElementById("progressStudentHiddenId").value = checkedStudents[0].value;
+    document.getElementById("progressStudentId").value = checkedStudents[0].value;
     document.getElementById("progressStudentForm").submit();
 }
 

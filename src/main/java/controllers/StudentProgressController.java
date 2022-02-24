@@ -19,13 +19,12 @@ import java.util.List;
 public class StudentProgressController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Mark> marks;
         Term selectedTerm;
 
         DBServices dbServices = new DBServices();
 
         try {
-            String studentId = req.getParameter("progressStudentHiddenId");
+            String studentId = req.getParameter("progressStudentId");
             Student student = dbServices.getStudentById(studentId);
 
             List<Term> terms = dbServices.getAllActiveTerms();
@@ -37,8 +36,15 @@ public class StudentProgressController extends HttpServlet {
                 selectedTerm = dbServices.getTermById(selected);
             }
 
-            marks = dbServices.getMarksByStudentAndTermId(studentId, String.valueOf(selectedTerm.getId()));
+            List<Mark> marks = dbServices.getMarksByStudentAndTermId(studentId, String.valueOf(selectedTerm.getId()));
 
+
+            double averageMark = marks.stream()
+                    .mapToDouble(Mark::getMark)
+                    .average().orElse(0.0);
+
+
+            req.setAttribute("averageMark", averageMark);
             req.setAttribute("terms", terms);
             req.setAttribute("selectedTerm", selectedTerm);
             req.setAttribute("marks", marks);
@@ -51,10 +57,5 @@ public class StudentProgressController extends HttpServlet {
             req.setAttribute("currentPage", "sqlerror.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }

@@ -23,35 +23,22 @@ public class StudentProgressEditController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DBServices dbServices = new DBServices();
 
+        String studentId = req.getParameter("studentId");
+        String termId = req.getParameter("termId");
+
         List<Discipline> disciplinesByTerm = null;
         List<Mark> marksByStudentAndTermId = null;
-
-        String studentId = req.getParameter("studentId");
         Student student = null;
-
-        String termId = req.getParameter("termId");
         Term term = null;
 
         try {
             student = dbServices.getStudentById(studentId);
-            req.setAttribute("student", student);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            req.setAttribute("currentPage", "sqlerror.jsp");
-            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
-        }
-
-        try {
             term = dbServices.getTermById(termId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            req.setAttribute("currentPage", "sqlerror.jsp");
-            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
-        }
-
-
-        try {
             disciplinesByTerm = dbServices.getDisciplinesByTerm(termId);
+            marksByStudentAndTermId = dbServices.getMarksByStudentAndTermId(studentId, termId);
+
+            req.setAttribute("student", student);
+            req.setAttribute("term", term);
             req.setAttribute("disciplines", disciplinesByTerm);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,15 +46,9 @@ public class StudentProgressEditController extends HttpServlet {
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
 
-
-        try {
-            marksByStudentAndTermId = dbServices.getMarksByStudentAndTermId(studentId, termId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         Map<Discipline, Mark> markMap = new HashMap<>();
 
+        assert marksByStudentAndTermId != null;
         for (Mark mark : marksByStudentAndTermId) {
             markMap.put(mark.getDiscipline(), mark);
         }
@@ -76,14 +57,14 @@ public class StudentProgressEditController extends HttpServlet {
             markMap.putIfAbsent(discipline, new Mark(student, term, discipline, 0));
         }
 
-        List<DisciplineWithMark> disciplinesWithMarks = new ArrayList<>();
+        List<DisciplineWithMark> disciplinesWithMarks;
 
         disciplinesWithMarks = markMap.entrySet().stream()
-//                .peek(disciplineMarkEntry -> System.out.println(disciplineMarkEntry.getKey() + " : "+disciplineMarkEntry.getValue()))
                 .map((k) -> new DisciplineWithMark(k.getKey(), k.getValue()))
                 .collect(Collectors.toList());
 
         req.setAttribute("disciplinesWithMarks", disciplinesWithMarks);
+
         req.setAttribute("currentPage", "student-progress-edit.jsp");
         req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
     }
@@ -104,12 +85,11 @@ public class StudentProgressEditController extends HttpServlet {
             Term term = dbServices.getTermById(String.valueOf(termId));
 
             for (int i = 0; i < markIds.length; i++) {
+                Discipline discipline = dbServices.getDisciplineById(String.valueOf(disciplineIds[i]));
                 if (markIds[i].equals("0")) {
-                    Discipline discipline = dbServices.getDisciplineById(String.valueOf(disciplineIds[i]));
                     dbServices.createMark(student, term, discipline, Integer.parseInt(marks[i]));
                 } else {
-                    Discipline discipline = dbServices.getDisciplineById(String.valueOf(disciplineIds[i]));
-                    dbServices.updateMark(new Mark(Integer.parseInt(markIds[i]),student,term,discipline,Integer.parseInt(marks[i])));
+                    dbServices.updateMark(new Mark(Integer.parseInt(markIds[i]), student, term, discipline, Integer.parseInt(marks[i])));
                 }
             }
         } catch (SQLException e) {
@@ -118,6 +98,10 @@ public class StudentProgressEditController extends HttpServlet {
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
 
-        resp.sendRedirect("/students");
+        req.setAttribute("student", studentId);
+        req.setAttribute("currentPage", "student-progress.jsp");
+        req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
+
+//        resp.sendRedirect("/students");
     }
 }

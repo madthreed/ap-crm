@@ -32,8 +32,6 @@ public interface IDBServices {
 
     List<Discipline> getDisciplinesByTerm(String idTerm) throws SQLException;
 
-    List<Discipline> getDisciplinesWithMarksByStudentAndTerm(String studentId, String termId) throws SQLException;
-
     void createTerm(String duration, String idsDisc) throws SQLException;
 
     void modifyTermById(String idTerm, String newDuration, String newIdsDisc, String unblockedIdsTD) throws SQLException;

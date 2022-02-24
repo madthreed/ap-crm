@@ -236,12 +236,6 @@ public class DBServices implements IDBServices {
     }
 
     @Override
-    public List<Discipline> getDisciplinesWithMarksByStudentAndTerm(String studentId, String termId) throws SQLException {
-        return null;
-    }
-
-
-    @Override
     public void createTerm(String duration, String idsDisc) throws SQLException {
         createConnection();
         Statement stmt = connection.createStatement();
@@ -255,16 +249,8 @@ public class DBServices implements IDBServices {
         } else {
             nextTerm = Integer.parseInt(lastActiveTerm.getName()) + 1;
         }
-//        String nextTermName = "Семестр " + nextTerm;
-        String nextTermName = nextTerm + "";
 
-
-//        PreparedStatement stmt = connection.prepareStatement("insert into term (`term`, `duration`) values (?,?);");
-//        stmt.setString(1, nextTermName);
-//        stmt.setString(2, duration);
-//        stmt.executeQuery();
-
-        stmt.execute("insert into term (`term`, `duration`) values ('" + nextTermName + "', '" + duration + "')");
+        stmt.execute("insert into term (`term`, `duration`) values ('" + nextTerm + "', '" + duration + "')");
 
         lastActiveTerm = getLastActiveTerm();
 
@@ -539,23 +525,11 @@ public class DBServices implements IDBServices {
 
     @Override
     public void updateMark(Mark mark) throws SQLException {
-        int tdId = 0;
-
         createConnection();
-        PreparedStatement tdIdStmt = connection.prepareStatement("select td.id from term_discipline td where id_term = ? and id_discipline = ?;");
-        tdIdStmt.setInt(1, mark.getTerm().getId());
-        tdIdStmt.setInt(2, mark.getDiscipline().getId());
-
-        ResultSet rs = tdIdStmt.executeQuery();
-        while (rs.next()) {
-            tdId = rs.getInt("id");
-        }
-
-        PreparedStatement createMarkStmt = connection.prepareStatement("update mark set `id_student` = ?, `id_term_discipline` = ?, `mark` = ? where id = ?;");
-        createMarkStmt.setInt(1, mark.getStudent().getId());
-        createMarkStmt.setInt(2, tdId);
-        createMarkStmt.setInt(3, mark.getMark());
-        createMarkStmt.setInt(4, mark.getId());
+        PreparedStatement stmt = connection.prepareStatement("update mark set `mark` = ? where id = ?;");
+        stmt.setInt(1, mark.getMark());
+        stmt.setInt(2, mark.getId());
+        stmt.executeUpdate();
     }
 }
 

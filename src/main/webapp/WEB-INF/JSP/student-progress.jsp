@@ -61,7 +61,7 @@
                     </c:choose>
                 </c:forEach>
             </select>
-            <input type="hidden" name="progressStudentHiddenId" value="${student.id}">
+            <input type="hidden" name="progressStudentId" value="${student.id}">
             <input class="apply_button" type="submit" value="Выбрать">
         </form>
 
@@ -71,6 +71,6 @@
             <input class="apply_button" type="submit" value="Редактировать оценки">
         </form>
 
-        <p>Средняя оценка за семестр: 666 баллов</p>
+        <p>Средняя оценка за семестр: ${averageMark}</p>
     </div>
 </section>
