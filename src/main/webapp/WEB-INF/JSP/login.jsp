@@ -15,6 +15,10 @@
         <input class="apply_button" type="submit" value="Войти">
     </form>
 
+    <p style="font-size: small">test credentials:</p>
+    <p style="font-size: small">admin:123, teacher:123, student:123</p>
+
+
     <c:if test="${message == 1}">
         <p style="color: red; font-size: smaller">Логин, пароль или роль пользователя не верны</p>
     </c:if>

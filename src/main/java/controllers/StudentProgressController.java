@@ -29,7 +29,6 @@ public class StudentProgressController extends HttpServlet {
             Student student = dbServices.getStudentById(studentId);
 
             List<Term> terms = dbServices.getAllActiveTerms().stream().sorted(Comparator.comparing(Term::getName)).collect(Collectors.toList());
-            ;
 
             String selected = req.getParameter("termSelector");
             if (selected == null) {
