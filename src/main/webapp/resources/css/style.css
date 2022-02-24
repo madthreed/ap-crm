@@ -307,59 +307,58 @@ select::selection {
 
 .main-section__table tr:nth-child(2n-1) {
     background: #d7d7d7;
+    height: 1rem;
+}
+
+.main-section__table tr {
+    height: 1rem;
 }
 
 .main-section__table.col_checkbox {
     vertical-align: middle;
     text-align: center;
     width: 10%;
-    height: 3em;
+    /*height: 3em;*/
 }
 
 .main-section__table.col_surname {
     vertical-align: middle;
     text-align: center;
-
     width: 40%;
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_name {
     vertical-align: middle;
     text-align: center;
-
     width: 30%;
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_group {
     vertical-align: middle;
     text-align: center;
-
     width: 10%;
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_date {
     vertical-align: middle;
     text-align: center;
-
-    height: 3em;
+    /*height: 3rem;*/
 }
 
 .main-section__table.col_discipline {
     vertical-align: middle;
     text-align: center;
-
     width: 70%;
-    height: 3em;
+    /*height: 3em;*/
 }
 
 .main-section__table.col_mark {
     vertical-align: middle;
     text-align: center;
-
-    height: 3em;
+    /*height: 3em;*/
 }
 
 /*.students-tbl-header {*/
@@ -554,5 +553,25 @@ select::selection {
 
     .main-section__table {
         margin-top: 0;
+    }
+
+    .main-section.terms{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-section.students{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-section.disciplines{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-section.student-progress{
+        display: flex;
+        flex-direction: column;
     }
 }
