@@ -5,7 +5,7 @@
 
 <section class="main-section student-progress">
     <c:choose>
-        <c:when test="${role == 1}">
+        <c:when test="${role == 1 || role == 2}">
 
 
             <p class="main-section__title student-progress">
@@ -31,7 +31,9 @@
                 </tbody>
             </table>
 
+
             <form class="main-section__form" method="post" action="/student-progress-edit">
+                <p>Семестр ${term.name}</p>
                 <table class="main-section__table student-progress-disciplines">
                     <thead>
                     <tr>

@@ -2,6 +2,7 @@ package controllers;
 
 import database.DBServices;
 import entity.Discipline;
+import entity.Term;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "DisciplineController", urlPatterns = "/disciplines")
 public class DisciplineController extends HttpServlet {
@@ -19,7 +22,8 @@ public class DisciplineController extends HttpServlet {
         DBServices dbServices = new DBServices();
 
         try {
-            ArrayList<Discipline> disciplines = (ArrayList<Discipline>) dbServices.getAllActiveDisciplines();
+            List<Discipline> disciplines = dbServices.getAllActiveDisciplines().stream().sorted(Comparator.comparing(Discipline::getName)).collect(Collectors.toList());
+
             req.setAttribute("disciplines", disciplines);
             req.setAttribute("currentPage", "disciplines.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);

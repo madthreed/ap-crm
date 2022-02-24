@@ -11,6 +11,7 @@
                 <option value="${role.id}">${role.role}</option>
             </c:forEach>
         </select>
+        <br>
         <input class="apply_button" type="submit" value="Войти">
     </form>
 

@@ -34,7 +34,7 @@ public class StudentProgressEditController extends HttpServlet {
         try {
             student = dbServices.getStudentById(studentId);
             term = dbServices.getTermById(termId);
-            disciplinesByTerm = dbServices.getDisciplinesByTerm(termId);
+            disciplinesByTerm = dbServices.getDisciplinesByTerm(termId).stream().sorted(Comparator.comparing(Discipline::getName)).collect(Collectors.toList());
             marksByStudentAndTermId = dbServices.getMarksByStudentAndTermId(studentId, termId);
 
             req.setAttribute("student", student);
@@ -93,11 +93,7 @@ public class StudentProgressEditController extends HttpServlet {
                 }
             }
 
-//            req.setAttribute("student", student);
-//            req.setAttribute("currentPage", "student-progress.jsp");
-//            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
-
-            resp.sendRedirect("/student-progress?progressStudentId="+studentId+"");
+            resp.sendRedirect("/student-progress?progressStudentId=" + studentId + "");
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");

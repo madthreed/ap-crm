@@ -21,13 +21,24 @@
             <form id="modifyStudentForm" action="/student-modify" method="get">
                 <input type="hidden" id="modifyStudentHiddenId" name="modifyStudentHiddenId">
             </form>
-            <form id="progressStudentForm" action="/student-progress" method="get">
-                <input type="hidden" id="progressStudentId" name="progressStudentId">
-            </form>
         </c:if>
+
+        <form id="progressStudentForm" action="/student-progress" method="get">
+            <input type="hidden" id="progressStudentId" name="progressStudentId">
+        </form>
     </div>
 
-    <p>Список студентов</p>
+    <br>
+
+    <span>Список студентов</span>
+
+    <label style="font-size: x-small">Сортировать по:
+        <select>
+            <option  disabled>фамилии</option>
+            <option  disabled>группе</option>
+            <option  disabled>дате поступления</option>
+        </select>
+    </label>
 
     <table class="main-section__table students">
         <thead>
