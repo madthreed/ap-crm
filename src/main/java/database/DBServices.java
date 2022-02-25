@@ -351,7 +351,6 @@ public class DBServices implements IDBServices {
             student.setName(rs.getString("name"));
             student.setGroup(rs.getString("group"));
             student.setDate(rs.getDate("date"));
-//            student.setStatus(rs.getInt("status"));
             students.add(student);
         }
 
@@ -451,8 +450,6 @@ public class DBServices implements IDBServices {
     @Override
     public List<Mark> getMarksByStudentAndTermId(String studentId, String termId) throws SQLException {
         List<Mark> marks = new LinkedList<>();
-
-//        Map<Discipline, Mark> disciplineMarkMap = new HashMap<>();
 
         createConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT m.id, m.id_student, td.id_term, td.id_discipline, m.mark FROM discipline d left join term_discipline td on d.id=td.id_discipline left join term t on td.id_term=t.id left join mark m on m.id_term_discipline = td.id where d.status='1' and t.status='1' and m.id_student = ? and td.id_term = ?;");
