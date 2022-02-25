@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @WebServlet(name = "HomeController", urlPatterns = "/home")
 public class HomeController extends HttpServlet{
     @Override

@@ -5,6 +5,10 @@ import entity.*;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 public interface IDBServices {
     String dateToDB(String date);
 
@@ -59,5 +63,7 @@ public interface IDBServices {
     void createMark(Student student, Term term, Discipline discipline, int mark) throws SQLException;
 
     void updateMark(Mark mark) throws SQLException;
+
+    void deleteMarkById(String id) throws SQLException;
     //TODO еще не все
 }

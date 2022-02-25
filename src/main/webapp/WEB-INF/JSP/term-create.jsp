@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section create-modify">
     <c:choose>
         <c:when test="${role == 1}">
@@ -27,7 +31,7 @@
             </div>
 
 
-            <form id="createTermForm" action="/term-create" method="post">
+            <form id="createTermForm" action="${pageContext.request.contextPath}/term-create" method="post">
                 <input type="hidden" id="createTermHiddenDuration" name="createTermHiddenDuration">
                 <input type="hidden" id="createTermHiddenIds" name="createTermHiddenIds">
             </form>

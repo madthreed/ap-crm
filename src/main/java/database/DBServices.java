@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 public class DBServices implements IDBServices {
     private Connection connection;
 
@@ -499,6 +503,14 @@ public class DBServices implements IDBServices {
         PreparedStatement stmt = connection.prepareStatement("update mark set `mark` = ? where id = ?;");
         stmt.setInt(1, mark.getMark());
         stmt.setInt(2, mark.getId());
+        stmt.executeUpdate();
+    }
+
+    @Override
+    public void deleteMarkById(String id) throws SQLException {
+        createConnection();
+        PreparedStatement stmt = connection.prepareStatement("delete from mark where id = ?;");
+        stmt.setInt(1, Integer.parseInt(id));
         stmt.executeUpdate();
     }
 }

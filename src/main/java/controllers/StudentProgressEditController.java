@@ -17,6 +17,10 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @WebServlet(name = "StudentProgressEditController", urlPatterns = "/student-progress-edit")
 public class StudentProgressEditController extends HttpServlet {
     @Override
@@ -86,9 +90,15 @@ public class StudentProgressEditController extends HttpServlet {
 
             for (int i = 0; i < markIds.length; i++) {
                 Discipline discipline = dbServices.getDisciplineById(String.valueOf(disciplineIds[i]));
-                if (markIds[i].equals("0")) {
+                if (marks[i].equals("0") && !markIds[i].equals("0")) {
+                    dbServices.deleteMarkById(markIds[i]);
+                }
+
+                if (!marks[i].equals("0") && markIds[i].equals("0")) {
                     dbServices.createMark(student, term, discipline, Integer.parseInt(marks[i]));
-                } else {
+                }
+
+                if (!marks[i].equals("0") && !markIds[i].equals("0")) {
                     dbServices.updateMark(new Mark(Integer.parseInt(markIds[i]), student, term, discipline, Integer.parseInt(marks[i])));
                 }
             }

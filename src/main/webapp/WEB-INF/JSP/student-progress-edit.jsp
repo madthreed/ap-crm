@@ -4,6 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section student-progress">
     <c:choose>
         <c:when test="${role == 1 || role == 2}">
@@ -33,7 +37,7 @@
             </table>
 
 
-            <form class="main-section__form" method="post" action="/student-progress-edit">
+            <form class="main-section__form" method="post" action="${pageContext.request.contextPath}/student-progress-edit">
                 <p>Семестр ${term.name}</p>
                 <table class="main-section__table student-progress-disciplines">
                     <thead>

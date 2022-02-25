@@ -2,8 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section create-modify">
-    <form method="post" action="/login" class="main-section__form">
+    <form method="post" action="${pageContext.request.contextPath}/login" class="main-section__form">
         <input class="main-section__form input" name="login" type="text" placeholder="Введите логин" required pattern="[A-Za-zА-Яа-я0-9]+" maxlength="64">
         <input class="main-section__form input" name="password" type="password" placeholder="Введите пароль" required>
         <select name="role">

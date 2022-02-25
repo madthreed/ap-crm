@@ -1,8 +1,10 @@
 package constants;
 
-public interface DbConfig {
-//        String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/students24?user=root&password=Piznecusem666$%25";
+/**
+ * Created by MadThreeD on 2022.
+ */
 
+public interface DbConfig {
     String DB_LOGIN = "root19";
     String DB_PASS = "piznec666";
     String DB_URL = "jdbc:mysql://localhost:3306/students24";

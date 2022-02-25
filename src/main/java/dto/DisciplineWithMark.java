@@ -3,6 +3,10 @@ package dto;
 import entity.Discipline;
 import entity.Mark;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 public class DisciplineWithMark {
     private Discipline discipline;
     private Mark mark;

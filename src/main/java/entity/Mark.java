@@ -1,6 +1,8 @@
 package entity;
 
-import lombok.Data;
+/**
+ * Created by MadThreeD on 2022.
+ */
 
 public class Mark {
     private int id;

@@ -15,6 +15,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @WebServlet(name = "TermController", urlPatterns = "/terms")
 public class TermController extends HttpServlet {
     @Override
@@ -31,7 +35,7 @@ public class TermController extends HttpServlet {
                 disciplines = dbServices.getDisciplinesByTerm(selected);
             } else {
                 selectedTerm = dbServices.getLastActiveTerm();
-                disciplines = selectedTerm!=null?dbServices.getDisciplinesByTerm(String.valueOf(selectedTerm.getId())):null;
+                disciplines = selectedTerm != null ? dbServices.getDisciplinesByTerm(String.valueOf(selectedTerm.getId())) : null;
             }
 
 

@@ -4,21 +4,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section create-modify">
     <c:choose>
         <c:when test="${role == 1}">
 
 
-            <p class="main-section__title">Отредактируйте длительность и спикок дисциплин и нажмите кнопку
+            <p class="main-section__title">Отредактируйте длительность и список дисциплин и нажмите кнопку
                 "Применить".</p>
-            <p style="font-size: x-small">Для изменения доступны только те дисциплины, по которым в семестре не
-                выставлены
-                оценки</p>
-            <p style="font-size: x-small">Выбор нескольких дисциплин Ctrl+click</p>
+            <p style="text-align:center; font-size: x-small">Для изменения доступны только те дисциплины, по которым в семестре не
+                выставлены оценки</p>
             <br>
             <br>
 
-            <form class="main-section__form" method="post" action="/term-modify">
+            <form class="main-section__form" method="post" action="${pageContext.request.contextPath}/term-modify">
                 <input type="hidden" name="id" value="${term.id}">
                 <p style="font-size: small">Длительность (в неделях)</p>
                 <input class="main-section__form input" type="number" name="duration" id="duration"
@@ -49,7 +51,7 @@
                 </div>
             </form>
 
-            <form method="get" action="/terms">
+            <form method="get" action="${pageContext.request.contextPath}/terms">
                 <input class="apply_button" type="submit" value="Вернуться к списку">
             </form>
 
