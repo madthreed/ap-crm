@@ -16,16 +16,16 @@ import java.io.IOException;
 public class HomeController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies();
-        boolean first;
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("count")) {
-
-                }
-            }
-        }
+//        Cookie[] cookies = req.getCookies();
+//        boolean first;
+//
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("count")) {
+//
+//                }
+//            }
+//        }
 
 
         req.setAttribute("currentPage", "home.jsp");
