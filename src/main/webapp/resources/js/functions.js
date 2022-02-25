@@ -1,3 +1,7 @@
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 function progressStudent() {
     let checkedStudents = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedStudents.length === 0) {
@@ -79,8 +83,6 @@ function createTerm() {
     let duration = document.getElementById('duration').value;
     let checkedDisciplines = document.querySelectorAll('#disciplineSelector option:checked');
 
-    // let ids = Array.from(selected).map(el => el.value + " ");
-
     if (checkedDisciplines.length === 0) {
         alert("Выберите хотя бы одну дисциплину!!");
         return;
@@ -102,8 +104,6 @@ function createTerm() {
 }
 
 function deleteTerm() {
-    // var checkedTerm = document.getElementById("termSelector").options.selectedIndex.value;
-
     let checkedTerm = document.querySelector('#termSelector option:checked');
 
     if (checkedTerm.length === 0) {
@@ -111,9 +111,7 @@ function deleteTerm() {
         return;
     }
 
-    let id = checkedTerm.value;
-
-    document.getElementById("deleteTermHiddenId").value = id;
+    document.getElementById("deleteTermHiddenId").value = checkedTerm.value;
     document.getElementById("deleteTermForm").submit();
 }
 
@@ -125,16 +123,14 @@ function modifyTerm() {
         return;
     }
 
-    let id = checkedTerm.value;
-
-    document.getElementById("modifyTermHiddenId").value = id;
+    document.getElementById("modifyTermHiddenId").value = checkedTerm.value;
     document.getElementById("modifyTermForm").submit();
 }
 
 function clearSelectedDisciplines(){
-    var elements = document.getElementById("disciplineSelector").options;
+    const elements = document.getElementById("disciplineSelector").options;
 
-    for(var i = 0; i < elements.length; i++){
+    for(let i = 0; i < elements.length; i++){
         elements[i].selected = false;
     }
 }

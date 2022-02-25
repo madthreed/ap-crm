@@ -2,20 +2,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section terms">
     <div class="main-section__menu terms">
         <c:if test="${role == 1}">
-            <form method="get" action="/term-create">
+            <form method="get" action="${pageContext.request.contextPath}/term-create">
                 <input class="i_button" type="submit" value="Создать семестр...">
             </form>
             <input class="i_button" onclick="modifyTerm()" type="submit" value="Модифицировать текущий семестр...">
             <input class="i_button" onclick="deleteTerm()" type="submit" value="Удалить текущий семестр...">
 
-            <form id="deleteTermForm" action="/terms" method="post">
+            <form id="deleteTermForm" action="${pageContext.request.contextPath}/terms" method="post">
                 <input type="hidden" id="deleteTermHiddenId" name="deleteTermHiddenId">
             </form>
 
-            <form id="modifyTermForm" action="/term-modify" method="get">
+            <form id="modifyTermForm" action="${pageContext.request.contextPath}/term-modify" method="get">
                 <input type="hidden" id="modifyTermHiddenId" name="modifyTermHiddenId">
             </form>
         </c:if>
@@ -23,7 +27,7 @@
 
     <div class="main-section__terms-termslist">
         <span>Выбрать семестр</span>
-        <form method="get" action="/terms">
+        <form method="get" action="${pageContext.request.contextPath}/terms">
             <select name="termSelector" id="termSelector" required>
                 <c:forEach var="term" items="${terms}">
                     <c:choose>

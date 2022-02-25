@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,12 +33,12 @@
 <div class="container">
     <c:if test="${role != null}">
         <nav class="nav">
-            <a class="nav_button" href="/home">На главную</a>
+            <a class="nav_button" href="${pageContext.request.contextPath}/home">На главную</a>
             <a class="nav_button" href="#" onclick="history.back();">Назад</a>
         </nav>
 
         <div class="log-in-out">
-            <a class="nav_button" href="/logout">Выйти</a>
+            <a class="nav_button" href="${pageContext.request.contextPath}/logout">Выйти</a>
         </div>
     </c:if>
 

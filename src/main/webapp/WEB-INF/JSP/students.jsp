@@ -2,28 +2,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section students">
     <div class="main-section__menu students">
         <input class="i_button" onclick="progressStudent()" type="submit"
                value="Просмотреть успеваемость выбранного студента">
 
         <c:if test="${role == 1}">
-            <form method="get" action="/student-create">
+            <form method="get" action="${pageContext.request.contextPath}/student-create">
                 <input class="i_button" type="submit" value="Создать студента...">
             </form>
             <input class="i_button" onclick="modifyStudent()" type="submit"
                    value="Модифицировать выбранного студента...">
             <input class="i_button" onclick="deleteStudents()" type="submit" value="Удалить выбранных студентов">
 
-            <form id="deleteStudentForm" action="/students" method="post">
+            <form id="deleteStudentForm" action="${pageContext.request.contextPath}/students" method="post">
                 <input type="hidden" id="deleteStudentHiddenId" name="deleteStudentHiddenId">
             </form>
-            <form id="modifyStudentForm" action="/student-modify" method="get">
+            <form id="modifyStudentForm" action="${pageContext.request.contextPath}/student-modify" method="get">
                 <input type="hidden" id="modifyStudentHiddenId" name="modifyStudentHiddenId">
             </form>
         </c:if>
 
-        <form id="progressStudentForm" action="/student-progress" method="get">
+        <form id="progressStudentForm" action="${pageContext.request.contextPath}/student-progress" method="get">
             <input type="hidden" id="progressStudentId" name="progressStudentId">
         </form>
     </div>

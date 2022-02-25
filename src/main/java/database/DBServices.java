@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 public class DBServices implements IDBServices {
     private Connection connection;
 

@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @WebServlet(name = "TermCreateController", urlPatterns = "/term-create")
 public class TermCreateController extends HttpServlet {
     @Override

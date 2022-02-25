@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @WebServlet(name = "DisciplineCreateController", urlPatterns = "/discipline-create")
 public class DisciplineCreateController extends HttpServlet {
     @Override

@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.sql.Date;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @Data
 public class Student {
     private int id;

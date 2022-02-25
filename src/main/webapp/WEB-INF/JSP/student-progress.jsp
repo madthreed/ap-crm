@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section student-progress">
     <p class="main-section__title student-progress">
         Отображена успеваемость для следующего студента:
@@ -28,7 +32,7 @@
 
     <div class="main-section__student-progress-termlist">
         <span>Выбрать семестр</span>
-        <form method="get" action="/student-progress">
+        <form method="get" action="${pageContext.request.contextPath}/student-progress">
             <select name="termSelector" id="termSelector" required>
                 <c:forEach var="term" items="${terms}">
                     <c:choose>
@@ -46,14 +50,14 @@
         </form>
 
         <c:if test="${role == 1 || role == 2}">
-            <form method="get" action="/student-progress-edit">
+            <form method="get" action="${pageContext.request.contextPath}/student-progress-edit">
                 <input type="hidden" name="studentId" value="${student.id}">
                 <input type="hidden" name="termId" value="${selectedTerm.id}">
                 <input class="apply_button" type="submit" value="Редактировать оценки">
             </form>
         </c:if>
 
-        <form method="get" action="/students">
+        <form method="get" action="${pageContext.request.contextPath}/students">
             <input class="apply_button" type="submit" value="Вернуться к списку">
         </form>
 
