@@ -59,5 +59,7 @@ public interface IDBServices {
     void createMark(Student student, Term term, Discipline discipline, int mark) throws SQLException;
 
     void updateMark(Mark mark) throws SQLException;
+
+    void deleteMarkById(String id) throws SQLException;
     //TODO еще не все
 }

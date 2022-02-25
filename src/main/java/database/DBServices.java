@@ -501,5 +501,13 @@ public class DBServices implements IDBServices {
         stmt.setInt(2, mark.getId());
         stmt.executeUpdate();
     }
+
+    @Override
+    public void deleteMarkById(String id) throws SQLException {
+        createConnection();
+        PreparedStatement stmt = connection.prepareStatement("delete from mark where id = ?;");
+        stmt.setInt(1, Integer.parseInt(id));
+        stmt.executeUpdate();
+    }
 }
 
