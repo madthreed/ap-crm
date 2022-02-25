@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 public class LoginFilter implements Filter {
     private static final Logger logger = LogManager.getLogger(LoginFilter.class.getName());
 
@@ -28,9 +32,6 @@ public class LoginFilter implements Filter {
 
         String url = request.getRequestURI();
 
-//        logger.info(url);
-//        System.out.println(url);
-
         if (url.endsWith(".css") || url.endsWith(".js") || url.endsWith(".ttf")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
@@ -47,12 +48,10 @@ public class LoginFilter implements Filter {
             return;
         }
 
-
         response.sendRedirect("/login");
     }
 
     @Override
     public void destroy() {
-
     }
 }

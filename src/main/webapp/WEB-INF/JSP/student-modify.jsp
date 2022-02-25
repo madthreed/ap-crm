@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%--~
+  ~ Created by MadThreeD on 2022.
+  --%>
+
 <section class="main-section create-modify">
     <c:choose>
         <c:when test="${role == 1}">
@@ -11,7 +15,7 @@
                 Для модификации введите новые значения и нажмите кнопку "Применить".
             </p>
 
-            <form class="main-section__form" method="post" action="/student-modify">
+            <form class="main-section__form" method="post" action="${pageContext.request.contextPath}/student-modify">
                 <input type="hidden" name="id" value="${student.id}">
                 <input class="main-section__form input" type="text" name="surname" value="${student.surname}" required
                        pattern="[A-Za-zА-Яа-я]+" maxlength="64">
@@ -25,7 +29,7 @@
             </form>
 
 
-            <form method="get" action="/students">
+            <form method="get" action="${pageContext.request.contextPath}/students">
                 <input class="apply_button" type="submit" value="Вернуться к списку">
             </form>
 

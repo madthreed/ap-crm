@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 @WebServlet(name = "StudentModifyController", urlPatterns = "/student-modify")
 public class StudentModifyController extends HttpServlet {
     @Override
@@ -24,7 +28,7 @@ public class StudentModifyController extends HttpServlet {
 
             req.setAttribute("student", student);
             req.setAttribute("currentPage", "student-modify.jsp");
-            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req,resp);
+            req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("currentPage", "sqlerror.jsp");

@@ -2,7 +2,6 @@ package controllers;
 
 import database.DBServices;
 import entity.Student;
-import entity.Term;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +13,10 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+/**
+ * Created by MadThreeD on 2022.
+ */
 
 @WebServlet(name = "StudentController", urlPatterns = "/students")
 public class StudentController extends HttpServlet {

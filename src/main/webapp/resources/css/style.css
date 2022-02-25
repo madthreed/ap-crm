@@ -1,3 +1,7 @@
+/**
+ * Created by MadThreeD on 2022.
+ */
+
 * {
     padding: 0;
     margin: 0;
@@ -5,7 +9,6 @@
 }
 
 body {
-    /*width: 100%;*/
     margin: 8px 8px;
 }
 
@@ -15,7 +18,6 @@ label {
 
 select {
     background: #e7e7e7;
-    /*color: #c2c2c2;*/
     color: #0021c3;
     border-radius: 4px;
     padding: 0 8px;
@@ -28,10 +30,6 @@ select {
 select::selection {
     color: #625f5f;
 }
-
-/*p {*/
-/*    font-size: smaller;*/
-/*}*/
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -57,16 +55,11 @@ select::selection {
     text-align: center;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
-
-    /*height: fit-content;*/
 }
 
 .a_button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-
-    /*background: rgb(177, 198, 237);*/
-    /*border-radius: 5px;*/
 }
 
 .apply_button {
@@ -90,9 +83,6 @@ select::selection {
 .apply_button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-
-    /*background: rgb(177, 198, 237);*/
-    /*border-radius: 5px;*/
 }
 
 .i_button {
@@ -109,16 +99,12 @@ select::selection {
     transition: all 0.2s ease-in-out;
     height: fit-content;
     cursor: pointer;
-
     min-width: 350px;
 }
 
 .i_button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-
-    /*background: rgb(177, 198, 237);*/
-    /*border-radius: 5px;*/
 }
 
 .nav_button {
@@ -127,7 +113,6 @@ select::selection {
     font-size: 0.8em;
     font-weight: bold;
     border: none;
-    /*margin: 5px 10px;*/
     padding: 0 8px;
     border-radius: 5px;
     text-align: center;
@@ -140,15 +125,7 @@ select::selection {
     /*transform: translateY(-3px);*/
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
     background: rgba(51, 63, 159, 0.7);
-
-    /*background: rgba(51, 63, 159);*/
-    /*rgb(177, 198, 237);*/
 }
-
-/*a:visited {*/
-/*    color: rgb(110, 83, 83);*/
-/*}*/
-
 
 .container {
     background: #ececec;
@@ -158,17 +135,13 @@ select::selection {
     height: 95vh;
     border-radius: 12px;
     padding: 6px 6px;
-    /*margin-bottom: 32px;*/
 }
 
 .nav {
-    /*grid-row: 2;*/
     grid-row: 1;
     grid-column: 1;
-    /*margin-top: 18px;*/
     text-align: center;
     align-self: center;
-    /*text-align: left;*/
 }
 
 .log-in-out {
@@ -176,7 +149,6 @@ select::selection {
     grid-column: 3;
     align-self: center;
     text-align: center;
-    /*margin: 4px;*/
 }
 
 .header {
@@ -214,11 +186,8 @@ select::selection {
 }
 
 /*-------------------------------------------*/
-/**/
 
 .main-section {
-    /*background: rgba(46, 124, 206, 0.3);*/
-    /*padding-top: 18px;*/
     margin-top: 8px;
     grid-row: 2;
     grid-column: 2;
@@ -236,7 +205,7 @@ select::selection {
 }
 
 /*-------------------------------------------*/
-/**/
+
 .main-section.create-modify {
     display: flex;
     flex-direction: column;
@@ -263,8 +232,6 @@ select::selection {
 }
 
 /*-------------------------------------------*/
-/**/
-/*-------------------------------------------*/
 
 .main-section__table_overflow {
     height: 60vh;
@@ -272,7 +239,6 @@ select::selection {
 }
 
 .main-section__table {
-    /*overflow-y: auto;*/
     width: 100%;
     margin-bottom: 18px;
 
@@ -288,9 +254,7 @@ select::selection {
 }
 
 .main-section__table th {
-    /*background: rgb(203, 203, 203);*/
     background: #727171;
-    /*background: #7e7e7e;*/
     color: #fdfdfd;
     border: 1px solid #bbbbbb;
     font-weight: bold;
@@ -318,7 +282,6 @@ select::selection {
     vertical-align: middle;
     text-align: center;
     width: 10%;
-    /*height: 3em;*/
 }
 
 .main-section__table.col_surname {
@@ -332,51 +295,29 @@ select::selection {
     vertical-align: middle;
     text-align: center;
     width: 30%;
-    /*height: 3rem;*/
 }
 
 .main-section__table.col_group {
     vertical-align: middle;
     text-align: center;
     width: 10%;
-    /*height: 3rem;*/
 }
 
 .main-section__table.col_date {
     vertical-align: middle;
     text-align: center;
-    /*height: 3rem;*/
 }
 
 .main-section__table.col_discipline {
     vertical-align: middle;
     text-align: center;
     width: 70%;
-    /*height: 3em;*/
 }
 
 .main-section__table.col_mark {
     vertical-align: middle;
     text-align: center;
-    /*height: 3em;*/
 }
-
-/*.students-tbl-header {*/
-/*    height: 2em;*/
-/*}*/
-
-
-/*.student-progress-disciplines-tbl-header {*/
-/*    height: 2em;*/
-/*}*/
-
-/*.disciplines-tbl-header {*/
-/*    height: 2em;*/
-/*}*/
-
-/*.terms-tbl-header {*/
-/*    height: 2em;*/
-/*}*/
 
 .main-section__table.students {
 }
@@ -384,13 +325,11 @@ select::selection {
 .main-section__table.terms {
     grid-row: 3;
     grid-column: 1;
-    /*min-width: 300px;*/
 }
 
 .main-section__table.disciplines {
     grid-row: 2;
     grid-column: 1;
-    /*min-width: 300px;*/
 }
 
 .main-section__table.student-progress-sngd {
@@ -404,7 +343,6 @@ select::selection {
 }
 
 /*-------------------------------------------*/
-/**/
 
 .main-section__form {
     display: flex;
@@ -413,9 +351,6 @@ select::selection {
 
     width: 14rem;
     margin: 8px 0;
-    /*height: 1.5em;*/
-    /*margin-top: 18px;*/
-    /*background: #333f9f;*/
 }
 
 .main-section__form.disciplineSelector {
@@ -429,7 +364,6 @@ select::selection {
 
     outline: none;
 
-    /*height: 18px;*/
     width: 100%;
     font-weight: bolder;
     vertical-align: top;
@@ -437,7 +371,6 @@ select::selection {
 }
 
 .main-section__form.input:focus {
-    /*background: #bcbcbc;*/
     color: #333f9f;
 }
 
@@ -454,7 +387,6 @@ select::selection {
 }
 
 /*-------------------------------------------*/
-/**/
 
 .main-section__menu.home {
     display: grid;
@@ -464,7 +396,6 @@ select::selection {
 .main-section__menu.terms {
     grid-row: 3;
     grid-column: 2;
-    /*margin-top: 32px;*/
     height: fit-content;
 
     display: grid;
@@ -477,29 +408,21 @@ select::selection {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    /*display: grid;*/
-    /*grid-template-columns: 1fr 1fr;*/
-    /*width: fit-content;*/
 }
 
 .main-section__menu.disciplines {
     grid-row: 2;
     grid-column: 2;
-    /*margin-top: 32px;*/
     height: fit-content;
-
     display: grid;
-    /*grid-template-rows: 1fr 1fr 1fr;*/
     justify-content: center;
 }
 
 /*-------------------------------------------*/
-/**/
 
 .main-section__student-progress-termlist {
     grid-row: 3;
     grid-column: 2;
-    /*margin-top: 18px;*/
     padding: 18px 9px;
     justify-self: left;
 }
@@ -508,7 +431,6 @@ select::selection {
     grid-row: 1;
     grid-column: 1/span 2;
 }
-
 
 .disabled {
     pointer-events: none;
@@ -522,9 +444,6 @@ select::selection {
         grid-template-columns: 1fr 1fr;
     }
 
-    /*.main-section__menu1x3 {*/
-    /*    grid-template-columns: 1fr;*/
-    /*}*/
     .nav {
         grid-row: 1;
         grid-column: 1;
@@ -538,7 +457,6 @@ select::selection {
         grid-column: 2;
         text-align: center;
         font-size: larger;
-        /*align-self: normal;*/
     }
 
     .header {
@@ -548,7 +466,6 @@ select::selection {
     }
 
     .main-section {
-        /*background: rgba(46, 124, 206, 0.3);*/
         grid-row: 3;
         grid-column: 1/span 2;
         margin: 0;
