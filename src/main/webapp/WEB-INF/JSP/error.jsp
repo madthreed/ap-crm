@@ -7,7 +7,7 @@
   --%>
 
 <section class="main-section">
-    <p style="font-size: large">
-        ERROR!!!!
+    <p style="text-align: center; color:red; font-size: small">
+        ${message}
     </p>
 </section>

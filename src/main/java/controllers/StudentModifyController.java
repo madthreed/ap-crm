@@ -47,10 +47,11 @@ public class StudentModifyController extends HttpServlet {
         DBServices dbServices = new DBServices();
 
         try {
-            dbServices.modifyStudentById(id, surname, name, group, date); //dbServices.dateToDB(date));
+            dbServices.modifyStudentById(id, surname, name, group, date);
         } catch (SQLException e) {
             e.printStackTrace();
-            req.setAttribute("currentPage", "sqlerror.jsp");
+            req.setAttribute("message", "Вернитесь на предыдущую страницу и внимательно проверьте поля ввода, особенно дату))");
+            req.setAttribute("currentPage", "error.jsp");
             req.getRequestDispatcher("./WEB-INF/JSP/template.jsp").forward(req, resp);
         }
         resp.sendRedirect("/students");
